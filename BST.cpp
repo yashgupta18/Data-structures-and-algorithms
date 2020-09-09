@@ -274,25 +274,22 @@ void store_normal(node* root, vector<node*> &v){
   store_normal(root->right,v);
 }
 
-struct node* normal_to_BSR(vector<node*> v, int start,int end){
+struct node* normal_to_BSR_util(vector<node*> v, int start,int end){
   if(start>end) return NULL;
   int mid=(start+end)/2;
   
 
   node* root=v[mid];
-  root->left=normal_to_BSR(v,start, mid-1);
-  root->right=normal_to_BSR(v,mid+1, end);
-  
-
+  root->left=normal_to_BSR_util(v,start, mid-1);
+  root->right=normal_to_BSR_util(v,mid+1, end);
   return root; 
-
 }
 
 struct node* normal_to_BSR(node* root){
   vector<node*> v;
   store_normal(root, v);
   int n = v.size();
-  return normal_to_BSR(v,0, n-1);
+  return normal_to_BSR_util(v,0, n-1);
 }
 
 
@@ -310,17 +307,89 @@ bool search_tree(node* root, int diff){
     return true;
 }
 
-void find_sum( node* root, node* node, int sum){
-  if(root==NULL) return;
-  find_sum(root, node->left, sum);
-  int diff= sum - (node->data);
-  if((node->data) < diff){
-    if(search_tree(root, diff) == true){
-      cout<<"Element found are"<<node->data<<"And"<<diff;
+int find_sum(node* root, int sum){
+  if(root==NULL) return 0;
+
+  node* top1;
+  node* top2;
+  stack<node*> s1;
+  stack<node*> s2;
+
+  node* root1=root;
+  node* root2=root;
+
+  while(1){
+
+    while(root1!=NULL){
+      s1.push(root1);
+      root1=root1->left;
     }
+
+    while(root2!=NULL){
+      s2.push(root2);
+      root2=root2->right;
+    }
+
+    if (s1.empty() || s2.empty()) break; 
+
+    top1=s1.top();
+    top2=s2.top();
+
+    //to check overlapping
+    if(top1->data >= top2->data) return 0;
+
+    if(top1->data + top2->data ==sum){
+      cout<<"Elements are: "<<top1->data <<"and "<< top2->data<<endl;
+      //return if only one pair reqd
+      // return 1;
+
+      //for all possible pairs
+      s1.pop();
+      s2.pop();
+      root1=top1->right;
+      root2=top2->left;
+    }
+
+    else if(top1->data + top2->data > sum){
+      s2.pop();
+      //point root2 to left of new top2 
+      root2=top2->left;
+    }
+    else{
+      s1.pop();
+      //point root1 to right of new top1
+      root1=top1->right;
+    }
+  }
+  return 0;
 }
-  find_sum(root, node->right, sum);
+
+
+int BST_check_util(node* node, int min, int max)  
+{  
+    /* an empty tree is BST */
+    if (node==NULL)  
+        return 1;  
+              
+    /* false if this node violates 
+    the min/max constraint */
+    if (node->data < min || node->data > max)  
+        return 0;  
+      
+    /* otherwise check the subtrees recursively,  
+    tightening the min or max constraint */
+    return
+        BST_check_util(node->left, min, node->data) && // Allow only distinct values  
+        BST_check_util(node->right, node->data, max); // Allow only distinct values  
+}  
+
+
+int BST_check(node* root){
+  return BST_check_util(root, INT_MIN,INT_MAX);
 }
+
+
+
 
 // Driver program 
 int main() 
@@ -391,11 +460,20 @@ int main()
     // root->left->left->left = newNode(6); 
     // root->left->left->left->left = newNode(5); 
     // root= normal_to_BSR(root);
-    // preorder(root);
+    // inorder(root);
 
-    //find if sum exists
-    int sum=90;
-    find_sum(root,root, sum);
+    // //find if sum exists
+    // int sum=90;
+    // find_sum(root, sum);
+
+    //check if Tree is BST
+    if(BST_check(root)){
+      cout<<"True";
+    }else{
+      cout<<"False";
+    }
+
+
     return 0; 
 }
 
