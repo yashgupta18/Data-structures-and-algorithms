@@ -388,20 +388,100 @@ int BST_check(node* root){
   return BST_check_util(root, INT_MIN,INT_MAX);
 }
 
+void correct_swapped_nodes_util(struct node* root,node* &first, node* &middle, node* &last, node* &prev){
+  if(root){
+
+    correct_swapped_nodes_util(root->left,first,middle,last,prev);
+
+    if(prev && root->data < prev->data){
+      if(!first){
+        first=prev;
+        middle=root;
+      }else{
+        last=root;
+      }
+    }
+    prev=root;
+    correct_swapped_nodes_util(root->right,first,middle,last, prev);
+  }
+  
+}
+  
+void correct_swapped_nodes(struct node* root){
+  node* prev, *first,*last, *middle;
+  first=middle=last=prev=NULL;
+  correct_swapped_nodes_util(root, first, middle, last, prev);
+
+  if(first && last){
+    swap(first->data, last->data);
+  }else{
+    swap(first->data, middle->data);
+  }
+}
+
+void inorder_median(node* root, vector<int> &v){
+  if(root==NULL) return;
+
+  inorder_median(root->left,v);
+  v.push_back(root->data);
+  inorder_median(root->right, v);
+}
+
+void find_median(node* root){
+  vector<int> v;
+  inorder_median(root, v);
+  int sum=0;
+  for(int i=0; i<v.size(); i++){
+    sum=sum+v[i];
+  }
+
+  int median=sum/v.size();
+  cout<<median;
+}
 
 
+void morris_inorder(node* root){
+  node* current, *pre;
+  if(root==NULL) return;
+  current=root;
+  while(current!=NULL){
+    if(current->left==NULL){
+      cout<<current->data;
+      current=current->right;
+    }else{
+      //go to the rightmost of left subtree
+      pre=current->left;
+      while(pre->right!=NULL && pre->right != current){
+        pre=pre->right;
+      }
+      if(pre->right==NULL){
+        //make right of righmost point to current(i.e root) if right is NULL
+        pre->right=current;
+        //repeat same for left of current
+        current=current->left;
+      }else{
+        //if right is not NULL means we already traversed it so make it back to NULL
+        pre->right=NULL;
+        cout<<current->data;
+        current=current->right;
+      }
+    }
+    }
+}
 
 // Driver program 
 int main() 
 { 
     struct node *root = NULL; 
-    root = insert(root, 50); 
-    root =insert(root, 30); 
-    root =insert(root, 20); 
-    root =insert(root, 40); 
-    root =insert(root, 70); 
-    root =insert(root, 60); 
-    root =insert(root, 80); 
+    root = insert(root, 6); 
+    root =insert(root, 3); 
+    root =insert(root, 8); 
+    root =insert(root, 1); 
+    root =insert(root, 4); 
+    root =insert(root, 7); 
+    root =insert(root, 9); 
+
+
    
     // print inoder traversal of the BST 
     // cout<<"Before Deletion"<<endl;
@@ -466,12 +546,33 @@ int main()
     // int sum=90;
     // find_sum(root, sum);
 
-    //check if Tree is BST
-    if(BST_check(root)){
-      cout<<"True";
-    }else{
-      cout<<"False";
-    }
+    // //check if Tree is BST
+    // if(BST_check(root)){
+    //   cout<<"True";
+    // }else{
+    //   cout<<"False";
+    // }
+
+    // //nodes swapped in BST
+    // struct node *root = newNode(6); 
+    // root->left        = newNode(10); 
+    // root->right       = newNode(2); 
+    // root->left->left  = newNode(1); 
+    // root->left->right = newNode(3); 
+    // root->right->right = newNode(12); 
+    // root->right->left = newNode(7); 
+    // cout<<"Before"<<endl;
+    // inorder(root);
+    // correct_swapped_nodes(root);
+    // cout<<"After"<<endl;
+    // inorder(root);
+
+
+    // //median of BST
+    // find_median(root);
+
+    //morris inorder traversal
+    morris_inorder(root);
 
 
     return 0; 
