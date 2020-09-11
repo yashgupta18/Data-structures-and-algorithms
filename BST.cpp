@@ -419,27 +419,6 @@ void correct_swapped_nodes(struct node* root){
   }
 }
 
-void inorder_median(node* root, vector<int> &v){
-  if(root==NULL) return;
-
-  inorder_median(root->left,v);
-  v.push_back(root->data);
-  inorder_median(root->right, v);
-}
-
-void find_median(node* root){
-  vector<int> v;
-  inorder_median(root, v);
-  int sum=0;
-  for(int i=0; i<v.size(); i++){
-    sum=sum+v[i];
-  }
-
-  int median=sum/v.size();
-  cout<<median;
-}
-
-
 void morris_inorder(node* root){
   node* current, *pre;
   if(root==NULL) return;
@@ -469,17 +448,85 @@ void morris_inorder(node* root){
     }
 }
 
+
+int ksmall_BST(node* root, int k){
+  int count=0;
+  int ksmall=INT_MIN;
+  node* current=root;
+  while(current!=NULL){
+    if(current->left==NULL){
+      count++;
+      if(count==k){
+        ksmall = current->data; 
+        
+      }
+      current=current->right;
+    }else{
+      node* pre=current->left;
+      while(pre->right!=NULL && pre->right!=current){
+        pre=pre->right;
+      }
+      if(pre->right==NULL){
+        pre->right=current;
+        current=current->left;
+      }else{
+        pre->right=NULL;
+        count++;
+         if(count==k){
+          ksmall = current->data;
+          
+        }
+        current=current->right;
+      }
+    }
+  }
+  return ksmall;
+}
+
+
+// int find_median(node* root){
+//   if(root==NULL) return root;
+
+// }
+
+
+int num_of_BST(int n){
+//   dp -> options_per_tree_size
+// i -> current_tree_size
+// j -> current_root
+  int v[n + 1]; 
+    fill_n(v, n + 1, 0); 
+  
+    // Base case 
+    v[0] = 1; 
+    v[1] = 1; 
+
+  for (int i = 2; i <= n; i++) { 
+        for (int j = 1; j <= i; j++) { 
+            // n-i in right * i-1 in left 
+            v[i] = v[i] + (v[i - j] * v[j - 1]); 
+        } 
+    } 
+  return v[n];
+}
+
 // Driver program 
 int main() 
 { 
+    /*      BST
+                  50 
+               /     \ 
+              30      70 
+             /  \    /  \ 
+           20   40  60   80 */
     struct node *root = NULL; 
-    root = insert(root, 6); 
-    root =insert(root, 3); 
-    root =insert(root, 8); 
-    root =insert(root, 1); 
-    root =insert(root, 4); 
-    root =insert(root, 7); 
-    root =insert(root, 9); 
+    root = insert(root, 50); 
+    insert(root, 30); 
+    insert(root, 20); 
+    insert(root, 40); 
+    insert(root, 70); 
+    insert(root, 60); 
+    insert(root, 80);
 
 
    
@@ -571,9 +618,18 @@ int main()
     // //median of BST
     // find_median(root);
 
-    //morris inorder traversal
-    morris_inorder(root);
+    // //morris inorder traversal
+    // morris_inorder(root);
 
+    // //kth smallest in BST(using O(1) space
+    // int k=3;
+    // int smallest=ksmall_BST(root,k);
+    // cout<<smallest;
+
+    //No. of trees from 1-N numbers
+    int n = 3; 
+    cout << "Number of structurally Unique BST with " <<  
+    n << " keys are : " << num_of_BST(n) << "\n"; 
 
     return 0; 
 }
