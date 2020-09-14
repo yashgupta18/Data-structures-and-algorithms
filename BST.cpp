@@ -510,6 +510,17 @@ int num_of_BST(int n){
   return v[n];
 }
 
+
+struct node* array_to_bst(int arr[],int s,int e){
+	if(s>e) return 0;
+
+	int mid=s+(e-s)/2;
+	
+	struct node* root=newNode(arr[mid]);
+	root->left=array_to_bst(arr,s, mid-1);
+	root->right=array_to_bst(arr, mid+1, e);
+	return root;
+}
 // Driver program 
 int main() 
 { 
@@ -519,14 +530,14 @@ int main()
               30      70 
              /  \    /  \ 
            20   40  60   80 */
-    struct node *root = NULL; 
-    root = insert(root, 50); 
-    insert(root, 30); 
-    insert(root, 20); 
-    insert(root, 40); 
-    insert(root, 70); 
-    insert(root, 60); 
-    insert(root, 80);
+    // struct node *root = NULL; 
+    // root = insert(root, 50); 
+    // insert(root, 30); 
+    // insert(root, 20); 
+    // insert(root, 40); 
+    // insert(root, 70); 
+    // insert(root, 60); 
+    // insert(root, 80);
 
 
    
@@ -626,10 +637,19 @@ int main()
     // int smallest=ksmall_BST(root,k);
     // cout<<smallest;
 
-    //No. of trees from 1-N numbers
-    int n = 3; 
-    cout << "Number of structurally Unique BST with " <<  
-    n << " keys are : " << num_of_BST(n) << "\n"; 
+    // //No. of trees from 1-N numbers
+    // int n = 3; 
+    // cout << "Number of structurally Unique BST with " <<  
+    // n << " keys are : " << num_of_BST(n) << "\n"; 
+
+    //Array to BST
+    int arr[]={1,2,3,4,5,6};
+    int n = sizeof(arr) / sizeof(arr[0]);  
+    node *root = array_to_bst(arr, 0, n-1);
+    preorder(root);
+
+
+
 
     return 0; 
 }
