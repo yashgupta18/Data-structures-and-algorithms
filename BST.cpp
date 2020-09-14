@@ -521,6 +521,90 @@ struct node* array_to_bst(int arr[],int s,int e){
 	root->right=array_to_bst(arr, mid+1, e);
 	return root;
 }
+
+int check_preoreder(int arr[], int n){
+  int i, j; 
+  
+    // Check for increasing sequence 
+    for (i = 1; i < n; i++) 
+    { 
+        if (arr[i] < arr[i - 1]) 
+            continue; 
+  
+        if (arr[i] >= arr[i - 1]) 
+            break; 
+    } 
+  
+    if (i == n - 1) 
+        return 1; 
+  
+    // Check for decreasing sequence 
+    for (j = i + 1; j < n; j++)  
+    { 
+        if (arr[j] > arr[j - 1]) 
+            continue; 
+  
+        if (arr[j] <= arr[j - 1]) 
+            break; 
+    } 
+  
+    i = j; 
+  
+    if (i != n) 
+        return 0; 
+  
+    return 1; 
+} 
+
+
+void convert_to_postorder(int arr[], int s, int e){
+  if(s>e) return;
+
+  int mid=s+1;
+  while(mid<=e && arr[mid]<arr[s]){
+    mid++;
+  }
+  mid--;
+  //call for left
+  convert_to_postorder(arr, s+1, mid);
+  // call for right
+  convert_to_postorder(arr, mid+1, e);
+  cout<<arr[s]<<" ";
+
+}
+
+void root_preorder(int arr[],int n){
+  stack<int> s;
+  
+  for (int i = 0, j=1; j < n; ++i,j++)
+  {
+    bool found=false;
+    if(arr[i]>arr[j]){
+      s.push(arr[i]);
+    }
+
+    else{
+      while(!s.empty()){
+        if(arr[j]>s.top()){
+          s.pop();
+          found=true;
+        }
+        else{
+          break;
+        }
+      }
+    }
+    if(found)
+      cout<<arr[i]<<" ";
+  }
+
+  cout<<arr[n-1];
+
+}
+
+
+
+
 // Driver program 
 int main() 
 { 
@@ -642,14 +726,29 @@ int main()
     // cout << "Number of structurally Unique BST with " <<  
     // n << " keys are : " << num_of_BST(n) << "\n"; 
 
-    //Array to BST
-    int arr[]={1,2,3,4,5,6};
+    // //Array to BST
+    // int arr[]={1,2,3,4,5,6};
+    // int n = sizeof(arr) / sizeof(arr[0]);  
+    // node *root = array_to_bst(arr, 0, n-1);
+    // preorder(root);
+
+    // //given array can be a preorder of a tree or not
+    // //use concept of bitonic array first decrasing then inc. if that then true else false
+    // int arr[] = { 32,30,19, 34,55,66,70}; 
+    // int n = sizeof(arr) / sizeof(arr[0]);  
+    // int ans=check_preoreder(arr, n);
+    // cout<<ans;
+
+
+    // //preorder to postorder
+    //  int arr[] = { 40, 30, 35, 80, 100}; 
+    // int n = sizeof(arr) / sizeof(arr[0]);  
+    // convert_to_postorder(arr,0, n-1);
+
+    //print root elements from preorder
+    int arr[] = { 890, 325, 290, 530, 965 }; 
     int n = sizeof(arr) / sizeof(arr[0]);  
-    node *root = array_to_bst(arr, 0, n-1);
-    preorder(root);
-
-
-
+    root_preorder(arr,n);
 
     return 0; 
 }
