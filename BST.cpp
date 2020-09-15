@@ -602,8 +602,48 @@ void root_preorder(int arr[],int n){
 
 }
 
+void get_inorder_array(node *root, vector<int> &v){
+  if(root==NULL) return;
+
+  get_inorder_array(root->left, v);
+  v.push_back(root->data);
+  get_inorder_array(root->right, v);
 
 
+}
+
+void zero_sum_triplet(node* root){
+  vector<int> v;
+  get_inorder_array(root, v);
+  int n=v.size();
+  for (int i = 0; i < n; ++i)
+  {
+    cout<<v[i]<<" ";
+  }
+  cout<<endl;
+
+  for (int i = 0; i < n; ++i)
+  {
+    int l=i+1, r=n-1;
+    while(l<r){
+      if( v[i]+ v[l]+v[r] == 0 ){
+        cout<<"0 sum pair:"<<endl;
+        cout<<v[i]<<" "<<v[l]<<" "<<v[r]<<endl;
+        l++;
+        r--;
+      }
+      else if(v[i] + v[l]+v[r] < 0){
+        l++;
+      }
+      else{
+        r--;
+      }
+    }
+  }
+  
+
+
+}
 
 // Driver program 
 int main() 
@@ -745,10 +785,21 @@ int main()
     // int n = sizeof(arr) / sizeof(arr[0]);  
     // convert_to_postorder(arr,0, n-1);
 
-    //print root elements from preorder
-    int arr[] = { 890, 325, 290, 530, 965 }; 
-    int n = sizeof(arr) / sizeof(arr[0]);  
-    root_preorder(arr,n);
+    // //print root elements from preorder
+    // int arr[] = { 890, 325, 290, 530, 965 }; 
+    // int n = sizeof(arr) / sizeof(arr[0]);  
+    // root_preorder(arr,n);
+
+    //triplet with 0 sum in bst
+    struct node *root = NULL; 
+    root = insert(root, 20); 
+    insert(root, -10); 
+    insert(root, -15); 
+    insert(root, 25); 
+    insert(root, -5); 
+    insert(root, 30); 
+    insert(root, 10);
+    zero_sum_triplet(root);
 
     return 0; 
 }
