@@ -1,5 +1,6 @@
 #include<iostream>
 #include<map>
+#include<stack>
 #include<list>
 #include<unordered_map>
 #include<queue>
@@ -32,7 +33,7 @@ public:
 	}
 
 	void printAdjList(int x){
-		for(int i=0; i<V; i++){
+		for(int i=x; i<V; i++){
 			cout<<i<<" ";
 			for(auto x:adj[i]){
 				cout<<"->"<<x;
@@ -155,9 +156,52 @@ public:
 			}
 		}
 		return false;
-
 	}
 	
+	void dfs_connected_components(int node, bool vis[]){
+		vis[node]=true;
+
+		for(auto i: adj[node]){
+			if(!vis[i]){
+				dfs_connected_components(i, vis);
+			}
+		}
+	}
+
+	void Dfs_Topological_Util(int node, bool vis[],stack<int> &s){
+		// cout<<node<<" ";
+		vis[node]=true;
+		for(auto x:adj[node]){
+			if(!vis[x]){
+				// cout<<x<<" ";
+				Dfs_Topological_Util(x, vis,s);
+			}
+		}
+		s.push(node);
+	}
+
+	void Dfs_Topological(int node){
+		stack<int> s;
+		bool *vis=new bool[V];
+		// vector<bool> vis;
+		// map<int, bool> *vis;
+		for (int i = 0; i < V; i++){
+        	vis[i] = false; 
+        }
+
+        for (int i = 0; i < V; ++i)
+        {
+        	if(vis[i]==false){
+        		Dfs_Topological_Util(i,vis,s);
+        	}
+        }
+
+		while (s.empty() == false) 
+    	{ 
+        	cout << s.top() << " "; 
+        	s.pop(); 
+    	} 
+	}
 	
 };
 
@@ -172,7 +216,7 @@ int main(){
    
 
 	// // // // print Graph list
-	g.printAdjList(0);
+	// g.printAdjList(0);
 
 	// // //BFS TRAVERSAL
 	// g.bfs(0);
@@ -205,7 +249,49 @@ int main(){
 	// }
 
 
+	// //connected components
+	// Graph g3(12);
+	// int s=12;
+	// g3.addEdge(1, 2); 
+ //    g3.addEdge(1, 4); 
+ //    g3.addEdge(4, 3); 
+ //    g3.addEdge(5, 6); 
+ //    g3.addEdge(5, 7); 
+ //    g3.addEdge(6, 8);
+ //    g3.addEdge(9, 10); 
+ //    g3.addEdge(9, 11); 
+ 
+ //   	g3.printAdjList(1);
+
+ //    int count=0;
+ //    bool *vis=new bool[s];
+ //    for(int i=1; i<s; i++){
+ //    	if(!vis[i]){
+ //    		count++;
+ //    		g3.dfs_connected_components(i,vis);
+ //    	}
+ //    }
+ //    cout<<"Count: "<<count;
 	
+
+
+    //TOPOLOGICAL SORTING- Works for Directed Acyclic graph
+   	Graph g4(6); 
+    g4.addEdge(5, 2); 
+    g4.addEdge(5, 0); 
+    g4.addEdge(4, 0); 
+    g4.addEdge(4, 1); 
+    g4.addEdge(2, 3); 
+    g4.addEdge(3, 1); 
+    // g3.printAdjList(0);
+
+    g4.Dfs_Topological(0);
+
+
+
+
+
+
 	return 0;
 }
 
