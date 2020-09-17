@@ -5,26 +5,34 @@
 #include<queue>
 // #define V 5
 using namespace std;
-template<typename T>
+// template<typename T>
 class Graph{
-	// int V;  
- //    list<int> *adj;
+	int V;  
+    list<int> *adj;
 
-   	map<T, list<T> > adj;
+   	// map<T, list<T> > adj;
 public:
-	// Graph(int V){
-	// 	this->V= V;
-	// 	adj=new list<int>[V];
+	Graph(int V)
+	{
+		this->V= V;
+		adj=new list<int>[V];
+	}
+
+
+	// void addEdge(int x, int y){
+	// 	adj[x].push_back(y);
+	// 	adj[y].push_back(x);
 	// }
 
-
-	void addEdge(int x, int y){
+	void addEdge(int x, int y, bool directed=true){
 		adj[x].push_back(y);
-		adj[y].push_back(x);
+		if(!directed){
+			adj[y].push_back(x);
+		}	
 	}
 
 	void printAdjList(int x){
-		for(int i=0; i<adj.size(); i++){
+		for(int i=0; i<V; i++){
 			cout<<i<<" ";
 			for(auto x:adj[i]){
 				cout<<"->"<<x;
@@ -33,16 +41,17 @@ public:
 		}
 	}
 
-	void bfs(T node){
-		// bool vis[V];
-		map<T, int> vis;
+	void bfs(int node){
+		bool vis[]={};
+		// vector<bool> vis;
+		// map<T, int> vis;
 		queue<int>q;
 
 		q.push(node);
 		vis[node]=true;
 
 		while(!q.empty()){
-			T node = q.front();
+			int node = q.front();
 			q.pop();
 			cout<<node<<" "<<endl;
 
@@ -55,7 +64,7 @@ public:
 		}
 	}
 
-	void dfs_Util(T node, map<T, bool> &vis){
+	void dfs_Util(int node, bool vis[]){
 		cout<<node<<" ";
 		vis[node]=true;
 		for(auto x:adj[node]){
@@ -65,39 +74,138 @@ public:
 		}
 	}
 
-	void dfs(T node){
-		map<T, bool> vis;
-		//Mark all as false(not visited)
-		for(auto p:adj){
-			T node=p.first;
-			vis[node]=false;
-		}
+	void dfs(int node){
+		bool *vis=new bool[V];
+		// vector<bool> vis;
+		// map<int, bool> *vis;
+		for (int i = 0; i < V; i++) 
+        	vis[i] = false; 
+
 		dfs_Util(node,vis);
 	}
 
+
+	bool containscycle_Util(int node, bool vis[], int parent){
+		vis[node]=true;
+
+		for(auto i:adj[node]){
+			if(!vis[i]){
+				//if not visited recursive fn is called again
+				if(containscycle_Util(i,vis,node)){
+					return true;
+				}
+			}
+			//if vis[] is true then check if i is parent. if not there is a cycle
+			else if(i!=parent){
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	bool containscycle(){
+		bool *vis = new bool[V]; 
+    	for (int i = 0; i < V; i++) 
+       		vis[i] = false; 
+		
+		for(int i=0; i<V; i++){
+			if(!vis[i]){
+				//for each in vis check for cycle using DFS
+				if(containscycle_Util(0,vis,-1)){
+					return true;
+				}
+			}
+		}
+		return false; 
+	}
+
+
+
+	bool directedCycle_Util(int node,bool vis[], bool helper[]){
+		vis[node]=true;
+		helper[node]=true;
+
+		for(auto i:adj[node]){
+			if(!vis[node] && directedCycle_Util(i,vis,helper)){
+				return true;
+			}
+			else if(helper[node]==true) return true;
+		}
+		//turn helper[i] as false to return recursive fn
+		helper[node]=false;
+		return false;
+	}
+
+	bool directedCycle(){
+		bool *vis=new bool[V];
+		bool *helper=new bool[V];
+
+		for (int i = 0; i < V; ++i)
+		{
+			vis[i]=false;
+			helper[i]=false;
+		}
+
+		for(int i=0; i<V; i++){
+			if(!vis[i]){
+				if(directedCycle_Util(i,vis, helper)){
+					return true;
+				}
+			}
+		}
+		return false;
+
+	}
 	
 	
 };
 
 int main(){
-	// Graph g(5);
-	Graph<int> g;
-	g.addEdge(0,1);
-	g.addEdge(1,2);
-	g.addEdge(2,3);
-	g.addEdge(3,4);
-	g.addEdge(4,5);
-	g.addEdge(3,0);
+	Graph g(5);
+	// Graph<int> g;
+	g.addEdge(1, 0); 
+    g.addEdge(0, 2); 
+    g.addEdge(2, 1); 
+    g.addEdge(0, 3); 
+    g.addEdge(3, 4); 
+   
 
 	// // // // print Graph list
-	// g.printAdjList(0);
+	g.printAdjList(0);
 
 	// // //BFS TRAVERSAL
 	// g.bfs(0);
 
-	// DFS TRAVERSAL
-	g.dfs(0);
+	// // DFS TRAVERSAL
+	// g.dfs(0);
 
+
+	// //Detect cycle for UNDIRECTED GRAPHS
+	// Graph g2(8); 
+ //    g2.addEdge(0, 1); 
+ //    g2.addEdge(1, 2);
+ //    g2.addEdge(2, 3); 
+ //    g2.addEdge(3, 4);
+ //    g2.addEdge(5, 6); 
+ //    g2.addEdge(6, 7);
+
+	// if(g2.containscycle()){
+	// 	cout<<"Contains Cycle";
+	// }else{
+	// 	cout<<"NO Cycle";
+	// }
+
+
+	//Detect Cycle for DIRECTED GRAPH
+	// if(g.directedCycle()){
+	// 	cout<<"Contains Cycle";
+	// }else{
+	// 	cout<<"NO Cycle";
+	// }
+
+
+	
 	return 0;
 }
 
