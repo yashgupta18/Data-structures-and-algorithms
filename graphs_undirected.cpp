@@ -1,5 +1,6 @@
 #include<iostream>
 #include<map>
+#include<string>
 #include<stack>
 #include<list>
 #include<unordered_map>
@@ -25,7 +26,7 @@ public:
 	// 	adj[y].push_back(x);
 	// }
 
-	void addEdge(int x, int y, bool directed=true){
+	void addEdge(int x, int y, bool directed=false){
 		adj[x].push_back(y);
 		if(!directed){
 			adj[y].push_back(x);
@@ -122,7 +123,6 @@ public:
 	}
 
 
-
 	bool directedCycle_Util(int node,bool vis[], bool helper[]){
 		vis[node]=true;
 		helper[node]=true;
@@ -180,7 +180,7 @@ public:
 		s.push(node);
 	}
 
-	void Dfs_Topological(int node){
+	void Dfs_Topological(){
 		stack<int> s;
 		bool *vis=new bool[V];
 		// vector<bool> vis;
@@ -202,7 +202,13 @@ public:
         	s.pop(); 
     	} 
 	}
+
+	int min(int x, int y) 
+	{ 
+    	return (x < y)? x : y; 
+	} 
 	
+		
 };
 
 int main(){
@@ -276,19 +282,32 @@ int main(){
 
 
     //TOPOLOGICAL SORTING- Works for Directed Acyclic graph
-   	Graph g4(6); 
-    g4.addEdge(5, 2); 
-    g4.addEdge(5, 0); 
-    g4.addEdge(4, 0); 
-    g4.addEdge(4, 1); 
-    g4.addEdge(2, 3); 
-    g4.addEdge(3, 1); 
-    // g3.printAdjList(0);
+   	// Graph g4(6); 
+    // g4.addEdge(5, 2); 
+    // g4.addEdge(5, 0); 
+    // g4.addEdge(4, 0); 
+    // g4.addEdge(4, 1); 
+    // g4.addEdge(2, 3); 
+    // g4.addEdge(3, 1); 
+    // // g3.printAdjList(0);
 
-    g4.Dfs_Topological(0);
+    // g4.Dfs_Topological();
 
-
-
+    //Shortest path from source to destinantion in unweighted graph
+    Graph g5(5);
+    g5.addEdge(0, 1); 
+    g5.addEdge( 0, 3); 
+    g5.addEdge( 1, 2); 
+   	g5.addEdge( 3, 4); 
+    g5.addEdge( 3, 7); 
+    g5.addEdge( 4, 5); 
+    g5.addEdge( 4, 6); 
+    g5.addEdge( 4, 7); 
+    g5.addEdge( 5, 6); 
+    g5.addEdge( 6, 7); 
+    int source = 0, dest = 7; 
+    g5.bfs_shortest(source,dest);
+    
 
 
 
