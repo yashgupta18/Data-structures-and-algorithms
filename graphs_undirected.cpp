@@ -6,6 +6,8 @@
 #include<unordered_map>
 #include<queue>
 // #define V 5
+ #define ROW 5
+ #define COL 5
 using namespace std;
 // template<typename T>
 class Graph{
@@ -207,18 +209,19 @@ public:
 	{ 
     	return (x < y)? x : y; 
 	} 
-	
-		
+
+
+
 };
 
 int main(){
-	Graph g(5);
-	// Graph<int> g;
-	g.addEdge(1, 0); 
-    g.addEdge(0, 2); 
-    g.addEdge(2, 1); 
-    g.addEdge(0, 3); 
-    g.addEdge(3, 4); 
+	// Graph g(5);
+	// // Graph<int> g;
+	// g.addEdge(1, 0); 
+ //    g.addEdge(0, 2); 
+ //    g.addEdge(2, 1); 
+ //    g.addEdge(0, 3); 
+ //    g.addEdge(3, 4); 
    
 
 	// // // // print Graph list
@@ -294,21 +297,22 @@ int main(){
     // g4.Dfs_Topological();
 
     //Shortest path from source to destinantion in unweighted graph
-    Graph g5(5);
-    g5.addEdge(0, 1); 
-    g5.addEdge( 0, 3); 
-    g5.addEdge( 1, 2); 
-   	g5.addEdge( 3, 4); 
-    g5.addEdge( 3, 7); 
-    g5.addEdge( 4, 5); 
-    g5.addEdge( 4, 6); 
-    g5.addEdge( 4, 7); 
-    g5.addEdge( 5, 6); 
-    g5.addEdge( 6, 7); 
-    int source = 0, dest = 7; 
-    g5.bfs_shortest(source,dest);
+    // Graph g5(5);
+    // g5.addEdge(0, 1); 
+    // g5.addEdge( 0, 3); 
+    // g5.addEdge( 1, 2); 
+   	// g5.addEdge( 3, 4); 
+    // g5.addEdge( 3, 7); 
+    // g5.addEdge( 4, 5); 
+    // g5.addEdge( 4, 6); 
+    // g5.addEdge( 4, 7); 
+    // g5.addEdge( 5, 6); 
+    // g5.addEdge( 6, 7); 
+    // int source = 0, dest = 7; 
+    // g5.bfs_shortest(source,dest);
     
 
+    
 
 
 	return 0;
