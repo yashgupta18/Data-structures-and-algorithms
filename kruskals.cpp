@@ -1,4 +1,3 @@
-#include<bits/stdc++.h>
 #include<iostream>
 #include<map>
 #include<string>
@@ -27,6 +26,7 @@ int findParent(int v, int *parent){
 	if(parent[v]==v){
 		return v;
 	}
+	//recursion call
 	return findParent(parent[v], parent);
 }
 
@@ -104,7 +104,9 @@ int main(){
 
 
 //input
+// // src dest weight
 // 6 11
+
 // 0 1 2
 // 1 3 1
 // 0 2 4
