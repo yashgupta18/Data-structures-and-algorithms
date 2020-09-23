@@ -46,7 +46,8 @@ bool solveNqueens(int board[N][N], int col){
 		
 		if(isSafe(board, row, col)){
 			board[row][col]=1;
-		
+			
+			//recursion
 			if(solveNqueens(board, col+1)){
 				return true;
 			}

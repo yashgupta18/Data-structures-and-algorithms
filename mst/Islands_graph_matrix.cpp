@@ -27,40 +27,40 @@ bool isSafe(int M[][COL], int row, int col, bool vis[ROW][COL]){
     }   
 
     //USING BFS
-    void BFS(int mat[R][COL], bool vis[R][COL], 
-         int si, int sj) 
-    { 
+    // void BFS(int mat[R][COL], bool vis[R][COL], 
+    //      int si, int sj) 
+    // { 
   
-    // These arrays are used to get row and 
-    // column numbers of 8 neighbours of 
-    // a given cell 
-    int row[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; 
-    int col[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; 
+    // // These arrays are used to get row and 
+    // // column numbers of 8 neighbours of 
+    // // a given cell 
+    // int row[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; 
+    // int col[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; 
   
-    // Simple BFS first step, we enqueue 
-    // source and mark it as visited 
-    queue<pair<int, int> > q; 
-    q.push(make_pair(si, sj)); 
-    vis[si][sj] = true; 
+    // // Simple BFS first step, we enqueue 
+    // // source and mark it as visited 
+    // queue<pair<int, int> > q; 
+    // q.push(make_pair(si, sj)); 
+    // vis[si][sj] = true; 
   
-    // Next step of BFS. We take out 
-    // items one by one from queue and 
-    // enqueue their univisited adjacent 
-    while (!q.empty()) { 
+    // // Next step of BFS. We take out 
+    // // items one by one from queue and 
+    // // enqueue their univisited adjacent 
+    // while (!q.empty()) { 
   
-        int i = q.front().first; 
-        int j = q.front().second; 
-        q.pop(); 
+    //     int i = q.front().first; 
+    //     int j = q.front().second; 
+    //     q.pop(); 
   
-        // Go through all 8 adjacent 
-        for (int k = 0; k < 8; k++) { 
-            if (isSafe(mat, i + row[k],j + col[k], vis)) { 
-             vis[i + row[k]][j + col[k]] = true; 
-             q.push(make_pair(i + row[k], j + col[k])); 
-            } 
-        } 
-    } 
-    } 
+    //     // Go through all 8 adjacent 
+    //     for (int k = 0; k < 8; k++) { 
+    //         if (isSafe(mat, i + row[k],j + col[k], vis)) { 
+    //          vis[i + row[k]][j + col[k]] = true; 
+    //          q.push(make_pair(i + row[k], j + col[k])); 
+    //         } 
+    //     } 
+    // } 
+    // } 
     
     int  countIslands(int M[][COL]){
         bool vis[ROW][COL];
