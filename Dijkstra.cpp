@@ -59,6 +59,7 @@ public:
 
 		while(!s.empty()){
 
+			//point to first in set
 			auto p = *(s.begin());
 
 			//node with minimum distance will always be first node in set
@@ -111,7 +112,8 @@ int main(){
 	// g.bfs(0);
 
 	g.dijkstra("A");
-
+	//another solution
+	// https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-priority_queue-stl/
 	return 0;
 }
 
