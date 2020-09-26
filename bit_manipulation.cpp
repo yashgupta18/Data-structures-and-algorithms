@@ -1,4 +1,6 @@
 #include<iostream>
+#include<vector>
+
 using namespace std;  
 // Function to return the only odd 
 // occurring element 
@@ -39,22 +41,52 @@ int main(void)
     
 
 
-    //count no fo set bits
-    int n=5; //1011
-    int count=0;
-    while(n>0){
-        if((n & 1)>0){
-            count++;
-        }
-        n=n>>1; //right shift o 1 time
+    // //count no fo set bits
+    // int a=5; //1011
+    // int count=0;
+    // while(a>0){
+    //     if((a & 1)>0){
+    //         count++;
+    //     }
+    //     a=a>>1; //right shift o 1 time
+    // }
+    // cout<<"count="<<count<<endl;    
+
+
+    // //check if no is power of 2
+    // int b=8;
+    // if(b<=0) cout<<"False";
+    // if((b&(b-1))==0) cout<<"True";
+    // else cout<<"False";
+
+
+    //XOR queries of subarray
+    cout<<endl;
+    int arr1[]={1,3,4,8};
+    int size=sizeof(arr1)/sizeof(arr1[0]);
+    int L=3, R=3 ;
+    int prefix[size];
+    prefix[0]=arr1[0];
+    for (int i = 1; i < size; ++i)
+    {
+        prefix[i]=arr1[i]^prefix[i-1];
     }
-    cout<<"count="<<count<<endl;    
 
-    
-
-
-
+     int ans=prefix[R]^prefix[L-1];
+     cout<<ans;
     return 0; 
+
+    vector<vector<int> > queries{}={
+                                    {0,1},
+                                    {1,2},      
+                                    {0,3},
+                                    {3,3}
+                                };
+    for (int i = 0; i < queries.size(); ++i)
+    {
+        cout<<queries[i];
+    }
+
 }
 
 
