@@ -23,7 +23,7 @@ void printSol(int mat[N][N]){
 }
 
 void floydWarshall(int mat[N][N]){
-
+	//output matrix initialize
 	int sol[N][N];
 	for (int i = 0; i < N; ++i)
 	{
@@ -33,7 +33,7 @@ void floydWarshall(int mat[N][N]){
 		}
 	}
 
-
+	// recheck from previous iteration the path to get min dis
 	for (int k = 0; k < N; ++k)
 	{
 		for (int i = 0; i < N; ++i)
