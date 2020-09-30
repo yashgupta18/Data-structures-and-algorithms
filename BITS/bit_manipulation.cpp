@@ -1,6 +1,5 @@
 #include<iostream>
 #include<vector>
-
 using namespace std;  
 // Function to return the only odd 
 // occurring element 
@@ -53,7 +52,7 @@ int main(void)
     // cout<<"count="<<count<<endl;    
 
 
-    // //check if no is power of 2
+    // //check if no. is power of 2
     // int b=8;
     // if(b<=0) cout<<"False";
     // if((b&(b-1))==0) cout<<"True";
@@ -105,7 +104,60 @@ int main(void)
             }
         }
     }
-    cout<<endl<<"AND Product=  "<<rresult<<endl;
+    // cout<<endl<<"AND Product=  "<<rresult<<endl;
+
+
+    //AND of subarray of an array
+    //To do-find subarray, AND operation of suarray, AMD of result obtained 
+    //Algo- if size of array is even res=0, else xor elements at even places 
+    int arr5[]={ 3,4,1,5};
+    long long int arr5_size=sizeof(arr5)/sizeof(arr5[0]);
+    long long int count5=0;
+    long long int res5=0;
+    
+    if(arr5_size%2==0){
+        cout<<"Res="<<0;
+    }else{
+        //XOR even places elements 
+        for (int i = 0; i < arr5_size; i+=2)
+        {
+            res5^=arr5[i];
+        }
+        cout<<endl<<res5<<endl;
+    }
+
+
+
+    //find number which occors only one time
+    int arr6[]={2,2,2,3,6,6,6};
+    //score stores sum of bit positions. in end if bit position is not divisible by 3 it means that bit is needed for odd one out
+    vector<int> store(32,0);
+
+    // for each element in arr check its bits
+    for (int i :arr6)
+    {   
+        // if jth bit is set increase score[j] by 1
+        for (int j = 0; j < 32; ++j)
+        {
+            if(i & (1<<j)){
+                store[j]++;
+            }
+        }
+    }
+
+    int res6=0;
+    //for each in store
+    for (int i = 0; i < 32; ++i)
+    {
+        // if it is not divisible by 3 we need that bit position set so 2 raise to power ith pos.
+        if(store[i]%3==1){
+            res6+=(1<<i);
+        }
+    }
+    cout<<endl<<"RESULT6="<<res6<<endl;
+    
+
+
 
 
 
