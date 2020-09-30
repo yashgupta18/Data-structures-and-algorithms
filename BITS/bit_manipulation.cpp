@@ -9,7 +9,7 @@ int findOdd(int arr[], int n)
     int res = 0, i; 
     for (i = 0; i < n; i++){ 
         res ^= arr[i];
-        cout<<res<<endl; 
+        // cout<<res<<endl; 
     }
     return res; 
 } 
@@ -73,20 +73,74 @@ int main(void)
     }
 
      int ans=prefix[R]^prefix[L-1];
-     cout<<ans;
-    return 0; 
+     // cout<<ans;
+    
 
-    vector<vector<int> > queries{}={
-                                    {0,1},
-                                    {1,2},      
-                                    {0,3},
-                                    {3,3}
-                                };
-    for (int i = 0; i < queries.size(); ++i)
+    
+    //XOR all pair sums
+
+    int arr3[]={ 1, 5, 6 };
+    int arr3_size=sizeof(arr3)/sizeof(arr3[0]);
+    int sum=0;
+    for (int i = 0; i < arr3_size; ++i)
     {
-        cout<<queries[i];
+        sum=sum ^ arr3[i];
     }
+    // cout<<endl<<sum* 2;
 
+
+    //AND product of a range of number
+    // https://www.youtube.com/watch?v=shKgCtEAVWQ&list=PL2q4fbVm1Ik7ip1VkWwe5U_CEb93vw6Iu&index=14
+    long long int low=12, upper=15; //find AND product of numbers btw 12 and 15 
+    // long long int a,b;
+    long long int d=upper-low, rresult=0, ff=1;
+    for (int i = 0; i < 32; ++i)
+    {
+        //use pattern of bit table 8 0's, 8 1's,  4 0's, 4 1's....
+        if(d>(ff<<i)) continue;
+        else{
+            //check if ith bit is set or not for lower and upper
+            if((low & (ff<<i)) && (upper & (ff<i))){
+                rresult+=ff<<i;
+            }
+        }
+    }
+    cout<<endl<<"AND Product=  "<<rresult<<endl;
+
+
+
+    // Total Sum of all Pair XOR
+    int arr4[]={ 5, 9, 7, 6 };
+    int arr4_size=sizeof(arr4)/sizeof(arr4[0]);
+    int zero_cnt=0, one_cnt=0; 
+    long long int nsum=0;
+    for (int i = 0; i < 31; ++i)
+    {
+        // long long int p2=0;
+        int zero_cnt=0, one_cnt=0;
+        for (int j = 0; j < arr4_size; ++j)
+        {
+            //ith it is set or not
+            if(arr4[j] & 1<<i){
+                //if set
+                one_cnt++;
+                
+            }else{
+                //if not set
+                zero_cnt++;
+            }
+        }
+        int p2=zero_cnt * one_cnt ;
+
+        //2 raise to power p2
+        nsum+= (1<<i)*p2;
+    }
+    // cout<<endl<<nsum<<endl;
+
+
+
+
+    return 0; 
 }
 
 
