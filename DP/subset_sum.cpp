@@ -11,19 +11,15 @@ int knapsack(int arr[], int sum, int n)
 { 
     int i, j; 
     bool t[n + 1][sum + 1]; 
-  
-    // Build table t[][] in bottom up manner 
-    for (i = 0; i <= n; i++) { 
-        for (j = 0; j <= sum; j++) { 
-        	// initialize 1st row and column with 0 rest with -1
-            if (i == 0){
-            	t[i][j] = false; 
-            }
-            else if(j==0){
-            	t[i][j] = true; 
-            } 
-        } 
-    } 
+    
+    for (int i = 0; i <= n; i++) 
+        t[i][0] = true; 
+
+    // If sum is not 0 and set is empty, 
+    // then answer is false 
+    for (int i = 1; i <= sum; i++) 
+        t[0][i] = false; 
+
 
     //for understanding
     cout<<"Before DP"<<endl;
@@ -40,6 +36,7 @@ int knapsack(int arr[], int sum, int n)
         for (int j = 1; j <= sum; j++) { 
 
             if(arr[i-1]<=j){
+
                 t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
             }
             else{
@@ -64,8 +61,8 @@ int knapsack(int arr[], int sum, int n)
 }
 
 int main(){
-	int arr[] = {2,3,7,8,10}; 
-    int sum = 7; 
+	int arr[] ={ 2,3,7,8,10 };
+    int sum = 11; 
     int n = sizeof(arr) / sizeof(arr[0]); 
 	cout<<knapsack(arr,sum,n);
 
