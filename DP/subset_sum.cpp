@@ -19,8 +19,6 @@ int knapsack(int arr[], int sum, int n)
     // then answer is false 
     for (int i = 1; i <= sum; i++) 
         t[0][i] = false; 
-
-
     //for understanding
     cout<<"Before DP"<<endl;
     for (i = 0; i <= n; i++) { 
@@ -34,12 +32,12 @@ int knapsack(int arr[], int sum, int n)
     
     for (int i = 1; i <= n; i++) { 
         for (int j = 1; j <= sum; j++) { 
-
             if(arr[i-1]<=j){
-
+                //first check if block can be filled without current no. OR it with if it can be filled with current no and remaining sum be filled from above
                 t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
             }
             else{
+                //just use the above value from table
                 t[i][j]= t[i-1][j];
             }
 
@@ -55,8 +53,8 @@ int knapsack(int arr[], int sum, int n)
         cout<<endl;
     } 
     cout<<endl; 
+    
     cout<<"Final Ans"<<endl;
-
     return t[n][sum]; 
 }
 
