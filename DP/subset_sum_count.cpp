@@ -10,7 +10,7 @@ int max(int a, int b)
 int knapsack(int arr[], int sum, int n) 
 { 
     int i, j; 
-    bool t[n + 1][sum + 1]; 
+    int t[n + 1][sum + 1]; 
     
     for (int i = 0; i <= n; i++) 
         t[i][0] = true; 
@@ -20,6 +20,12 @@ int knapsack(int arr[], int sum, int n)
     for (int i = 1; i <= sum; i++) 
         t[0][i] = false; 
     //for understanding
+    for (i = 1; i <= n; i++) { 
+        for (j = 1; j <= sum; j++) { 
+            t[i][j]=0;
+        } 
+    }
+
     cout<<"Before DP"<<endl;
     for (i = 0; i <= n; i++) { 
         for (j = 0; j <= sum; j++) { 
@@ -34,15 +40,17 @@ int knapsack(int arr[], int sum, int n)
         for (int j = 1; j <= sum; j++) { 
             if(arr[i-1]<=j){
                 //first check if block can be filled without current no. OR it with if it can be filled with current no and remaining sum be filled from above
-                t[i][j]=t[i-1][j-arr[i-1]] || t[i-1][j];
+                t[i][j]=( t[i-1][j-arr[i-1]] + t[i-1][j] );
             }
             else{
                 //just use the above value from table
                 t[i][j]= t[i-1][j];
+
             }
 
         } 
     }
+    cout<<endl;
 
     // for understanding
     cout<<"After DP"<<endl;
@@ -55,6 +63,7 @@ int knapsack(int arr[], int sum, int n)
     cout<<endl; 
     
     cout<<"Final Ans"<<endl;
+    cout<<"Count="<<" ";
     return t[n][sum]; 
 }
 
