@@ -7,7 +7,7 @@ int max(int a, int b)
 } 
 
 
-int knapsack(int arr[], int sum, int n) 
+int subset_sum_count(int arr[], int sum, int n) 
 { 
     int i, j; 
     int t[n + 1][sum + 1]; 
@@ -71,7 +71,7 @@ int main(){
 	int arr[] ={ 2,3,5,6,8,10 };
     int sum = 10; 
     int n = sizeof(arr) / sizeof(arr[0]); 
-	cout<<knapsack(arr,sum,n);
+	cout<<subset_sum_count(arr,sum,n);
 
 
 }
