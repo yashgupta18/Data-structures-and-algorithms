@@ -20,6 +20,7 @@ int coin_change_count(int arr[], int sum, int n)
         t[0][i] = INT_MAX-1; 
 
     //for setting 2nd row(only this ques exception) check notes
+     // ****IMPORTANT STEP****
     for (int j = 1; j < sum+1; ++j)
     {
         if((j%arr[0])==0){
@@ -49,6 +50,8 @@ int coin_change_count(int arr[], int sum, int n)
     for (int i = 1; i <= n; i++) { 
         for (int j = 1; j <= sum; j++) { 
             if(arr[i-1]<=j){
+
+                // ****IMPORTANT STEP****
 
                 //add one if the coin is selected
                 t[i][j]=min( t[i][j-arr[i-1]] + 1 , t[i-1][j] );
