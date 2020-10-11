@@ -63,7 +63,7 @@ void LCS(string X, string Y, int m, int n){
 	}
 	cout<<endl;
 
-	int count=0;
+	
 	cout<<"Longest subsequence = "<< t[m][n]<<endl ;
 	cout<<"String=";
 
@@ -93,6 +93,7 @@ void LCS(string X, string Y, int m, int n){
 	cout<<ans;
 
 	//Noob approach
+	// int count=0;
 	// for (int i = 0; i < m+1; ++i)
 	// 	{
 	// 		for (int j = 0; j < n+1; ++j)
