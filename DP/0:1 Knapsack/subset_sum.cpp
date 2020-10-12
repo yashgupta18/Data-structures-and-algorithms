@@ -54,7 +54,7 @@ int subset_sum(int arr[], int sum, int n)
     } 
     cout<<endl; 
     
-    cout<<"Final An s"<<endl;
+    cout<<"Final Ans"<<endl;
     return t[n][sum]; 
 }
 
@@ -63,6 +63,4 @@ int main(){
     int sum = 10; 
     int n = sizeof(arr) / sizeof(arr[0]); 
 	cout<<subset_sum(arr,sum,n);
-
-
 }
