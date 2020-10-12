@@ -38,7 +38,8 @@ void LCS(string X, string Y, int m, int n){
 	{
 		for (int j = 1; j < n+1; ++j)
 		{
-			if(X[i-1]==Y[j-1]){ 
+			//if(they are at same position don't include them)
+			if(X[i-1]==Y[j-1] && i!=j){ 
 				//if char at pos X[i-1]==Y[j-1], increase the count 
 				t[i][j] = 1+ t[i-1][j-1];
 			}
@@ -61,14 +62,14 @@ void LCS(string X, string Y, int m, int n){
 	}
 	cout<<endl;
 
-	cout<<"Longest subsequence = "<< t[m][n];	
+	cout<<"Longest Repeating Subsequence = "<< t[m][n];	
 	return;
 }
 
 int main(){
-	string X="abceh";
+	string X="AABEBCDD";
+	//AABBDD- longest repeating subsequence == 3(ABD)
 	int m=X.length();
-	string Y="abdefhr";
-	int n=Y.length();
-	LCS(X,Y,m,n);
+	LCS(X,X,m,m);
+	return 0;
 }
