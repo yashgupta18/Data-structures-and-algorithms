@@ -2,11 +2,6 @@
 #include<vector>
 using namespace std;
 
-int max(int a, int b) 
-{ 
-    return (a > b) ? a : b; 
-} 
-
 
 void min_subset_sum_diff(int arr[], int n) 
 { 
@@ -42,7 +37,7 @@ void min_subset_sum_diff(int arr[], int n)
     cout<<endl;
 
     
-    for (int i = 1; i <= n; i++) { 
+    for (int i = 1; i < n+1; i++) { 
         for (int j = 1; j < (sum/2)+1; j++) { 
             if(arr[i-1]<=j){
                 //first check if block can be filled without current no. OR it with if it can be filled with current no and remaining sum be filled from above
@@ -51,7 +46,6 @@ void min_subset_sum_diff(int arr[], int n)
             else{
                 //just use the above value from table
                 t[i][j]= t[i-1][j];
-
             }
 
         } 

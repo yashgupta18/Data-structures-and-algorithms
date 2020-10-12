@@ -38,7 +38,7 @@ void LCS(string X, string Y, int m, int n){
 	{
 		for (int j = 1; j < n+1; ++j)
 		{
-			//if(they are at same position don't include them)
+			//if they are at same position don't include them
 			if(X[i-1]==Y[j-1] && i!=j){ 
 				//if char at pos X[i-1]==Y[j-1], increase the count 
 				t[i][j] = 1+ t[i-1][j-1];
