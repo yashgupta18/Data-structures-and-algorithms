@@ -6,52 +6,43 @@ int max(int a, int b)
     return (a > b) ? a : b; 
 } 
 
-void LCS(string X, string Y, int m, int n){
+
+
+int LCS(string X, string Y, int m, int n){
 	int t[m+1][n+1];
-
-	for (int i = 0; i < m+1; ++i)
-	{
-		for (int j = 0; j < n+1; ++j){
-			if(i==0){
-				t[i][j]=1;
-			}
-
-			else{
-				t[i][j]=0;
-			}
-			
-			
-		}
-
-
-	}
-
-
-	cout<<"Before DP"<<endl;
 	for (int i = 0; i < m+1; ++i)
 	{
 		for (int j = 0; j < n+1; ++j)
 		{
-			cout<<t[i][j]<<" ";
+			if(i==0 || j==0){
+				t[i][j]=0;
+			}
+			else{
+				t[i][j]=-1;
+			}
+		}
+	}
+
+	cout<<endl<<"Before DP"<<endl;
+	for (int i = 0; i < m+1; ++i)
+	{
+		for (int j = 0; j < n+1; ++j)
+		{
+			cout<<t[i][j]<<"\t"<<" ";
 		}
 		cout<<endl;
 	}
 	cout<<endl;
 
-	
 	for (int i = 1; i < m+1; ++i)
 	{
 		for (int j = 1; j < n+1; ++j)
 		{
-			if(X[i-1]==Y[j-1]){ 
-				//if char at pos X[i-1]==Y[j-1], increase the count 
-				t[i][j] = t[i-1][j] + t[i][j-1];
-
+			if(X[i-1]==Y[j-1]){
+				t[i][j]=1+ t[i-1][j-1];
 			}
-	
 			else{
-				//if it is not same see for both by decreasing size of each and choosing the max 
-				t[i][j] =t[i][j-1];
+				t[i][j]= max(t[i-1][j], t[i][j-1]);
 			}
 		}
 	}
@@ -61,20 +52,45 @@ void LCS(string X, string Y, int m, int n){
 	{
 		for (int j = 0; j < n+1; ++j)
 		{
-			cout<<t[i][j]<<" ";
+			cout<<t[i][j]<<"\t"<<" ";
 		}
 		cout<<endl;
 	}
 	cout<<endl;
 
-	cout<<"Longest subsequence = "<< t[m][n];	
+	return t[m][n];
+}
+
+void LPS(string X, int m){
+	//store reverse of X in Y
+	string Y=string(X.rbegin(), X.rend());
+	int n=Y.length();
+	//call LCS on X & Y
+	int ans=LCS(X, Y, m, n); //this gives longest palindromic subsequence
+	ans=m-ans;
+	cout<<"Min Insertions = "<<ans<<endl;
+
+	string newString="";
+	for (int i = m-1; i >m-ans-1; --i)
+	{
+		// newString.append("gooo");
+		string temp="";
+		temp=X[i];
+		newString.append(temp);
+		// cout<<newString<<endl;
+		
+	}
+	X=newString+X;
+	cout<<X;
+	// if(ans)
 	return;
 }
 
 int main(){
-	string X="rabbbit";
+	string X="abb";
 	int m=X.length();
-	string Y="rabbit";
-	int n=Y.length();
-	LCS(X,Y,m,n);
+	cout<<m;
+	cout<<X[8];
+	LPS(X,m);
+	return 0;
 }
