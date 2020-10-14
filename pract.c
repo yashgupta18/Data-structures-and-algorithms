@@ -1,96 +1,30 @@
 #include<iostream>
+#include<vector>
 using namespace std;
 
-int max(int a, int b) 
-{ 
-    return (a > b) ? a : b; 
-} 
-
-
-
-int LCS(string X, string Y, int m, int n){
-	int t[m+1][n+1];
-	for (int i = 0; i < m+1; ++i)
+void equation(int arr1[], int n){
+	vector<int> v;
+	int j=0;
+	for (int i = s; i < n; ++i)
 	{
-		for (int j = 0; j < n+1; ++j)
-		{
-			if(i==0 || j==0){
-				t[i][j]=0;
-			}
-			else{
-				t[i][j]=-1;
-			}
-		}
+		int temp=arr1[i+1]*(2^(j-1));
+		j++;
+		v.push_back(temp);
+
 	}
 
-	cout<<endl<<"Before DP"<<endl;
-	for (int i = 0; i < m+1; ++i)
+	for (int i = 0; i < v.size(); ++i)
 	{
-		for (int j = 0; j < n+1; ++j)
-		{
-			cout<<t[i][j]<<"\t"<<" ";
-		}
-		cout<<endl;
+		cout<<v[i]<<" ";
 	}
-	cout<<endl;
-
-	for (int i = 1; i < m+1; ++i)
-	{
-		for (int j = 1; j < n+1; ++j)
-		{
-			if(X[i-1]==Y[j-1]){
-				t[i][j]=1+ t[i-1][j-1];
-			}
-			else{
-				t[i][j]= max(t[i-1][j], t[i][j-1]);
-			}
-		}
-	}
-
-	cout<<"After DP"<<endl;
-	for (int i = 0; i < m+1; ++i)
-	{
-		for (int j = 0; j < n+1; ++j)
-		{
-			cout<<t[i][j]<<"\t"<<" ";
-		}
-		cout<<endl;
-	}
-	cout<<endl;
-
-	return t[m][n];
-}
-
-void LPS(string X, int m){
-	//store reverse of X in Y
-	string Y=string(X.rbegin(), X.rend());
-	int n=Y.length();
-	//call LCS on X & Y
-	int ans=LCS(X, Y, m, n); //this gives longest palindromic subsequence
-	ans=m-ans;
-	cout<<"Min Insertions = "<<ans<<endl;
-
-	string newString="";
-	for (int i = m-1; i >m-ans-1; --i)
-	{
-		// newString.append("gooo");
-		string temp="";
-		temp=X[i];
-		newString.append(temp);
-		// cout<<newString<<endl;
-		
-	}
-	X=newString+X;
-	cout<<X;
-	// if(ans)
 	return;
 }
 
+
 int main(){
-	string X="abb";
-	int m=X.length();
-	cout<<m;
-	cout<<X[8];
-	LPS(X,m);
+	int arr1[]={3,2};
+	int n=sizeof(arr1)/sizeof(arr1[0]);
+	equation(arr1, n);
+
 	return 0;
 }
