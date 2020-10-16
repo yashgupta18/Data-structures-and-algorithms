@@ -85,9 +85,9 @@ void merge(string a, string b){
 
 int main(){
 	
-	//Pallindrome
-	// string p="ABCBA";
-	// cout<<check_pallindrome(p);
+	// Pallindrome
+	string p="PP";
+	cout<<check_pallindrome(p);
 
 	//Anagram
 	// string a="SILENT";
