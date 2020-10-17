@@ -7,12 +7,19 @@ int solve(string X,string Y){
 		return 0;
 	}
 
+
 	//if X and Y is ditto same return 1
 	if(X.compare(Y)==0){
 		return 1;
 	}
 
 	int n=X.length();
+
+	//if strings are empty
+	if(n==0){
+		return 1;
+	}
+
 	bool flag=false;
 
 	for (int i= 1; i< n; ++i)
