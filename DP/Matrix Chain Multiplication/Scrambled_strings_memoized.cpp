@@ -1,19 +1,20 @@
 #include<iostream>
+#include<unordered_map>
 using namespace std;
+unordered_map<string, bool> mp;
 
-int solve(string X,string Y){
+bool solve(string X,string Y){
 	//if length is not same not possible
 	if(X.length()!=Y.length()){
 		return 0;
 	}
-
 
 	//if X and Y is ditto same return 1
 	if(X.compare(Y)==0){
 		return 1;
 	}
 
-	
+
 	int n=X.length();
 	int m=Y.length();
 	//if strings are empty
@@ -21,6 +22,10 @@ int solve(string X,string Y){
 		return 1;
 	}
 
+	string temp=X+" "+Y;
+	if(mp.find(temp)!=mp.end()){
+		return mp[temp];
+	}
 	bool flag=false;
 
 	for (int i= 1; i< n; ++i)
@@ -43,13 +48,12 @@ int solve(string X,string Y){
 			break;
 		}
 	}
-	return flag;
+	return mp[temp] =flag;
 }
 
 int main(){
 	string X="great";
 	string Y="rgeat";
-
 	int n=X.length();
 	int m=Y.length();
 
@@ -69,6 +73,12 @@ int main(){
 			cout<<"Not Scrambled";
 		}
 	}
-	
+
+	//prints final map for understanding
+	cout<<endl;
+	cout<<"KEY"<<"\t\t"<<"Value"<<endl;
+	for(auto i: mp){
+		cout<<i.first<<"\t\t"<<i.second<<endl;
+	}
 	return 0;
 }
