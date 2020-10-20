@@ -17,16 +17,21 @@ int solve(Node* root, int &res){
 
 	if(root==NULL) return 0;
 
+	//hypothesis. gives l and r of tree
 	int l=solve(root->left, res);
 	int r=solve(root->right, res);
 
-
+	//max of left or right subtree
 	int temp=1 + max(l,r);
+
+	//max of either temp or current node as root and l and r as subtree has biggest diameter 
 	int ans=max(temp, l+r+1);
+
 	//final result is stored in res
 	res=max(res, ans);
 
 	//return temp is for recursion part. Final ans is in res 
+	// temp is for l and r recursion
 	return temp;
 }
 
