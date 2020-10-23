@@ -29,14 +29,24 @@ void inorder(struct node *root)
     } 
 }
 
+void postorder(struct node *root) 
+{ 
+    if (root != NULL) 
+    {
+        postorder(root->left); 
+        postorder(root->right); 
+        printf("%d \n", root->data); 
+    } 
+}
+
 void preorder(struct node *root) 
 { 
     if (root != NULL) 
     { 
         
         printf("%d \n", root->data); 
-        inorder(root->left); 
-        inorder(root->right); 
+        preorder(root->left); 
+        preorder(root->right); 
     } 
 }
 

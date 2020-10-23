@@ -1,49 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <iostream> 
-#include <unordered_map> 
 using namespace std; 
+#define max 4 
   
+// Recursive function to find the required number of ways 
+int countWays(int index, int cnt, int dp[][max], int n, int m, int k) 
+{ 
+    // if(dp[index][cnt]!=-1) return dp[index][cnt];
+  
+    // When all positions are filled 
+    if (index == n) { 
+  
+        // If adjacent pairs are exactly K 
+        if (cnt == k) 
+            return 1; 
+        else
+            return 0; 
+    } 
+  
+    // If already calculated 
+    if (dp[index][cnt] != -1) 
+        return dp[index][cnt]; 
+  
+    int ans = 0; 
+    
+    // Next position filled with same color 
+    ans += countWays(index + 1, cnt, dp, n, m, k); 
+  
+    // Next position filled with different color 
+    // So there can be m-1 different colors 
+    ans += (m - 1) * countWays(index + 1, cnt + 1, dp, n, m, k); 
+    
+    // for (int i = 0; i < index+1; ++i)
+    // {
+    //     for (int j = 0; j < cnt+1; ++j)
+    //     {
+    //         if(){
+    //             dp[index][cnt]=ans+ max(dp[i+1][j+1], dp[i+1][j]);
+    //         }
+
+    //         else{
+    //              dp[index][cnt]=dp[i+1][j];
+    //         }
+            
+    //     }
+    // }
+
+    cout<<"After dp"<<endl;
+    for (int i = 0; i < index+1; ++i)
+    {
+        for (int i = 0; i < cnt+1; ++i)
+        {
+            cout<<dp[index][cnt]<<" ";
+        }
+        cout<<endl;
+    }
+    return dp[index][cnt] = ans; 
+} 
+  
+// Driver Code 
 int main() 
 { 
-    // Declaring umap to be of <string, double> type 
-    // key will be of string type and mapped value will 
-    // be of double type 
-    unordered_map<string, double> umap; 
+    int n = 3, m = 2, k = 1; 
+    int dp[n + 1][max]; 
+    memset(dp, -1, sizeof dp); 
   
-    // inserting values by using [] operator 
-    umap["PI"] = 3.14; 
-    umap["root2"] = 1.414; 
-    umap["root3"] = 1.732; 
-    umap["log10"] = 2.302; 
-    umap["loge"] = 1.0; 
-  
-    // inserting value by insert function 
-    umap.insert(make_pair("e", 2.718)); 
-  
-    string key = "PI"; 
-  
-    // If key not found in map iterator to end is returned 
-    if (umap.find(key) == umap.end()) 
-        cout << key << " not found\n\n"; 
-  
-    // If key found then iterator to that key is returned 
-    else
-        cout << "Found " << key << "\n\n"; 
-  
-    key = "lambda"; 
-    if (umap.find(key) == umap.end()) 
-        cout << key << " not found\n"; 
-    else
-        cout << "Found " << key << endl; 
-  
-    //    iterating over all value of umap 
-    
-    unordered_map<string, double>:: iterator itr; 
-    cout << "\nAll Elements : \n"; 
-    for (itr = umap.begin(); itr != umap.end(); itr++) 
-    { 
-        // itr works as a pointer to pair<string, double> 
-        // type itr->first stores the key part  and 
-        // itr->second stroes the value part 
-        cout << itr->first << "  " << itr->second << endl; 
-     } 
-}
+    cout << m * countWays(1, 0, dp, n, m, k); 
+}  

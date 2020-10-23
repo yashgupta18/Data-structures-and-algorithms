@@ -3,28 +3,40 @@
 using namespace std;
 
 void equation(int arr1[], int n){
-	vector<int> v;
-	int j=0;
-	for (int i = s; i < n; ++i)
-	{
-		int temp=arr1[i+1]*(2^(j-1));
-		j++;
-		v.push_back(temp);
-
-	}
-
-	for (int i = 0; i < v.size(); ++i)
-	{
-		cout<<v[i]<<" ";
-	}
-	return;
+	
 }
 
 
 int main(){
-	int arr1[]={3,2};
-	int n=sizeof(arr1)/sizeof(arr1[0]);
-	equation(arr1, n);
+	// int x = 1, y = 2, z = 5;
+ //    int a = x && y&& z++;
+ //    printf("%d", z);
 
+    // int x = 1, y = 0, z = 3;
+    // x > y ? printf("%d", z);
+
+     // // bits
+     // int x = 1, z = 3;
+     // int y = x << 3;
+     // printf(" %d\n", y);
+
+
+	// int x = 0, y = 2, z = 3;
+	// int a = (y) & (x);
+	// printf("%d", a);
+
+
+	// int i = 2, j = 4;
+ //        if (i && (j = i+2 )){
+ //        	// printf("djsdnj\n");
+ //        	printf("%d\n", j+3);
+ //        }
+
+    int i = 1;
+        if (i && (i == 1))
+            printf("Yes\n");
+        else
+            printf("%d\n",i);
+            
 	return 0;
 }
