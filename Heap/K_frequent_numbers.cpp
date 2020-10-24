@@ -2,12 +2,14 @@
 #include <queue> 
 #include <unordered_map> 
 using namespace std; 
-typedef pair<int, pair<int, int> > ppi;
+typedef pair<int, int> ppi;
 
 void k_frequent(int arr[], int n, int k){
 	unordered_map<int, int> mp;
 
-	priority_queue<pair<int, int>,vector<pair<int, int> >,greater<pair<int, int> > > min_heap;
+	// priority_queue<pair<int, int>,vector<pair<int, int> >,greater<pair<int, int> > > min_heap;
+	priority_queue<ppi,vector<ppi >,greater<ppi > > min_heap;
+	
 	vector<int> sub;
 	for (int i = 0; i < n; ++i)
 		{

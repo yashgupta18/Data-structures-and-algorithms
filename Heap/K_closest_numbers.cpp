@@ -1,10 +1,11 @@
 #include <iostream>
 #include <queue> 
 using namespace std; 
+typedef pair<int, int> ppi;
 
 
 void k_largest(int arr[], int n, int k, int X){
-	priority_queue<pair<int, int> > max_heap;
+	priority_queue<ppi > max_heap;
 	vector<int> sub;
 	for (int i = 0; i < n; ++i)
 		{
