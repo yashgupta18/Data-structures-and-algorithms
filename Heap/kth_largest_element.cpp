@@ -4,7 +4,6 @@ using namespace std;
   
 void k_largest(int arr[], int n, int k){
 	priority_queue<int,vector<int>,greater<int> > min_heap;
-	vector<int> res;
 	for (int i = 0; i <n; ++i)
 	{
 		//use max heap or min heap

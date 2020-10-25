@@ -5,7 +5,6 @@ using namespace std;
 void k_smallest(int arr[], int n, int k){
 	// priority_queue<int> max_heap;
 	priority_queue<int> max_heap;
-	vector<int> res;
 
 	for (int i = 0; i <n; ++i)
 	{

@@ -6,7 +6,6 @@ using namespace std;
 typedef pair<int, pair<int, int> > ppi;
 
 void k_closest_to_origin(int x[], int y[], int n, int k){
-   // priority_queue<ppi,vector<ppi>,greater<ppi> > min_heap;
    priority_queue<ppi> max_heap;
    // priority_queue<pair<int, pair<int, int> >,vector<pair<int, pair<int, int> > >,greater<pair<int, pair<int, int> > > > min_heap;   
 

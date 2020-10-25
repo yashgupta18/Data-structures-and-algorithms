@@ -10,7 +10,6 @@ void k_frequent(int arr[], int n, int k){
 	// priority_queue<pair<int, int>,vector<pair<int, int> >,greater<pair<int, int> > > min_heap;
 	priority_queue<ppi,vector<ppi >,greater<ppi > > min_heap;
 	
-	vector<int> sub;
 	for (int i = 0; i < n; ++i)
 		{
 			//store pair of arr[i] and freq in mp

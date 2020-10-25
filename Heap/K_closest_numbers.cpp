@@ -6,7 +6,7 @@ typedef pair<int, int> ppi;
 
 void k_largest(int arr[], int n, int k, int X){
 	priority_queue<ppi > max_heap;
-	vector<int> sub;
+	// vector<int> sub;
 	for (int i = 0; i < n; ++i)
 		{
 			max_heap.push(make_pair(abs(arr[i]-X), arr[i]));

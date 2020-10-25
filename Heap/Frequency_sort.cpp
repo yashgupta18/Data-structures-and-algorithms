@@ -8,7 +8,6 @@ void frequency_sort(int arr[], int n){
 	unordered_map<int, int> mp;
 
 	priority_queue<pair<int, int> > max_heap;
-	vector<int> sub;
 	for (int i = 0; i < n; ++i)
 		{
 			//store pair of arr[i] and freq in mp
