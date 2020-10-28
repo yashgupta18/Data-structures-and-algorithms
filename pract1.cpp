@@ -1,29 +1,36 @@
 #include <iostream>
 #include <queue>
-
+#include <stack>
+#include <vector>
+#include <unorderedmap>
 using namespace std; 
-  
-// Return sum of maximum sum alternating 
-// sequence starting with arr[0] and is first 
-// decreasing. 
-void k_largest(int arr[], int n, int k){
+
+// vector<int> v;
+// queue<int> q;
+// unorderedmap<int> mp;
+// stack<int> s;
+// priority_queue<int> max_heap;
+// priority_queue<int,vector<int>,greater<int> > min_heap;
+
+void function(){
   priority_queue<int,vector<int>,greater<int> > min_heap;
-  for (int i = 0; i <n-2; ++i)
+  for (int i = 0; i <n; ++i)
   {
-    //use max heap or min heap
-    min_heap.push(abs(arr[i]-arr[i+2]));
+
   }
   
-  cout<<min_heap.top();
+  cout<< <<endl;
   return;
 }
   
 //Driver program 
-int main() 
-{ 
-    int arr[]= {1, 12, 7, 9 ,5 ,17}; 
-    int n = sizeof(arr)/sizeof(arr[0]); 
-    int k=3;
-    k_largest(arr , n, k ); 
-    return 0; 
+int main()
+{
+  long long int arr[]= {}; 
+  long long int n = sizeof(arr)/sizeof(arr[0]); 
+  long long int ans=function(); 
+  cout<ans;
+
+
+  return 0; 
 }
