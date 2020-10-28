@@ -35,8 +35,8 @@ void verticalTraversal(Node* root, vector<int> v){
 		//store vertical level index in key
 		int key=front.second;
 		mp[key].push_back(temp->data);
-		if(temp->left) q.push(make_pair(temp->left, key-1));
-		if(temp->right) q.push(make_pair(temp->right, key+1));
+		if(temp->left) q.push(make_pair(temp->left, key+1));
+		if(temp->right) q.push(make_pair(temp->right, key));
 	}
 
 	for (auto itr:mp){
