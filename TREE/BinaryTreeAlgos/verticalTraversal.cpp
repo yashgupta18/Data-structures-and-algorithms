@@ -20,7 +20,7 @@ struct Node *newNode(int item)
 }
 
 
-void verticalTraversal(Node* root, vector<int> v){
+void verticalTraversal(Node* root){
 	if(root==NULL) return;
 
 	queue<pair<Node*, int> > q;
@@ -59,8 +59,6 @@ int main(){
 	root->left->right=newNode(5);
 	root->right->left=newNode(6);
 	root->right->right=newNode(7);
-
-	vector<int> v;
-	verticalTraversal(root, v);
+	verticalTraversal(root);
 	cout<<endl;
 }

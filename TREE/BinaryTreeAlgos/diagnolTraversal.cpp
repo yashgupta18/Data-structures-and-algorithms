@@ -20,7 +20,7 @@ struct Node *newNode(int item)
 }
 
 
-void verticalTraversal(Node* root, vector<int> v){
+void method1(Node* root){
 	if(root==NULL) return;
 
 	queue<pair<Node*, int> > q;
@@ -50,6 +50,26 @@ void verticalTraversal(Node* root, vector<int> v){
 	return;
 }
 
+void preorder(Node* root, map<int, vector<int> > &mp, int key){
+	if(root==NULL) return;
+	mp[key].push_back(root->data);
+	preorder(root->right, mp, key);
+	preorder(root->left, mp, key+1);
+}
+
+void method2(Node* root){
+	map<int, vector<int> > mp;
+	preorder(root, mp, 0);
+
+	for (auto itr:mp){
+		//loop over vector in map
+		for (int i=0; i<itr.second.size(); ++i){
+			cout<<itr.second[i]<<" ";
+		}	
+		cout<<endl;
+	}
+}
+
 
 int main(){
 	Node *root= newNode(1);
@@ -59,8 +79,10 @@ int main(){
 	root->left->right=newNode(5);
 	root->right->left=newNode(6);
 	root->right->right=newNode(7);
-
-	vector<int> v;
-	verticalTraversal(root, v);
+	cout<<"METHOD 1="<<endl;
+	method1(root);
+	cout<<endl;
+	cout<<"METHOD 2="<<endl;
+	method2(root);
 	cout<<endl;
 }
