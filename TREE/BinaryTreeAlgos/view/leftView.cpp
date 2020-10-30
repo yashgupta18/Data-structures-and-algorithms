@@ -19,7 +19,7 @@ struct Node *newNode(int item)
     return temp; 
 }
 
-
+//Method 1
 void levelorder(Node* root){
 	if(root==NULL) return;
 	bool isFirst=true;
@@ -39,7 +39,7 @@ void levelorder(Node* root){
 		
 		else{
 			if(isFirst==true){
-				cout<<temp->data;
+				cout<<temp->data<<" ";
 				isFirst=false;
 			}
 			
@@ -51,6 +51,24 @@ void levelorder(Node* root){
 	return;
 }
 
+//Method 2
+int leftviewUtil(Node* root, int level, int &maxLevel){
+	if(root==NULL) return 0;
+	if(maxLevel<level){
+		cout<<root->data<<" ";
+		maxLevel=level;
+	}
+	leftviewUtil(root->left, level+1, maxLevel);
+	leftviewUtil(root->right, level+1, maxLevel);
+	return 0;
+}
+
+
+void leftview(Node* root){
+	if(root==NULL) return;
+	int maxLevel=0;
+	leftviewUtil(root, 1, maxLevel);
+}
 
 
 int main(){
@@ -62,6 +80,12 @@ int main(){
 	root->right->right=newNode(6);
 	root->right->left->left=newNode(7);
 	
+	cout<<"Method 1"<<endl;
 	levelorder(root);	
 	cout<<endl;
+	cout<<"Method 2"<<endl;
+	leftview(root);
+	cout<<endl;
+
+	return 0;
 }

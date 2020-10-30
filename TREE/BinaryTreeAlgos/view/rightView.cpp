@@ -38,7 +38,7 @@ void levelorder(Node* root){
 		}
 		else{
 			if(isFirst){
-				cout<<temp->data<<endl;
+				cout<<temp->data<<" ";
 				isFirst=false;
 			}
 			if(temp->right) q.push(temp->right);
@@ -49,6 +49,24 @@ void levelorder(Node* root){
 	return;
 }
 
+//Method 2
+int rightviewUtil(Node* root, int level, int &maxLevel){
+	if(root==NULL) return 0;
+	if(maxLevel<level){
+		cout<<root->data<<" ";
+		maxLevel=level;
+	}
+	rightviewUtil(root->right, level+1, maxLevel);
+	rightviewUtil(root->left, level+1, maxLevel);
+	return 0;
+}
+
+
+void rightview(Node* root){
+	if(root==NULL) return;
+	int maxLevel=0;
+	rightviewUtil(root, 1, maxLevel);
+}
 
 
 int main(){
@@ -60,6 +78,12 @@ int main(){
 	root->right->right=newNode(6);
 	root->right->left->left=newNode(7);
 	
+	cout<<"Method 1"<<endl;
 	levelorder(root);	
 	cout<<endl;
+	cout<<"Method 2"<<endl;
+	rightview(root);
+	cout<<endl;
+
+	return 0;
 }
