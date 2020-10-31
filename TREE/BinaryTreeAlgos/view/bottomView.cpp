@@ -32,9 +32,7 @@ void levelorder(Node* root){
 		q.pop();
 		Node* node=temp.first;
 		int key=temp.second;
-		if(mp.find(key)==mp.end()){
-			mp[key]=node->data;
-		};
+		mp[key]=node->data;
 
 		if(node->left) q.push(make_pair(node->left, key-1));
 		if(node->right) q.push(make_pair(node->right, key+1));
@@ -57,7 +55,7 @@ int main(){
 	root->right->left=newNode(6);
 	root->right->right=newNode(7);
 	
-	cout<<"Top view"<<endl;
+	cout<<"Bottom view"<<endl;
 	levelorder(root);	
 	cout<<endl;
 	
