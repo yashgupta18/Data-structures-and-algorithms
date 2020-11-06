@@ -38,6 +38,7 @@ bool subtreeCheck(Node* rootOne, Node* rootTwo){
 		Node* temp = q.front();
 		q.pop();
 		if(temp->data==rootTwo->data){
+			//call identical check
 			if(identicalCheck(temp, rootTwo)==true){
 				return true;
 			}

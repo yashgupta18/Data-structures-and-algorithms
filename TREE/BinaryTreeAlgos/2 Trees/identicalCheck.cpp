@@ -19,8 +19,6 @@ struct Node *newNode(int item)
     return temp; 
 }
 
-
-
 bool identicalCheck(Node* rootOne, Node* rootTwo){
 	if(rootOne==NULL && rootTwo==NULL) return true;
 	if(rootOne==NULL || rootTwo==NULL) return false;
@@ -28,9 +26,6 @@ bool identicalCheck(Node* rootOne, Node* rootTwo){
 
 	return identicalCheck(rootOne->left, rootTwo->left) && identicalCheck(rootOne->right, rootTwo->right);
 }
-
-
-
 
 int main(){
 	Node *rootOne= newNode(1);
