@@ -27,24 +27,20 @@ bool mirrorCheck(Node* rootOne, Node* rootTwo){
 	return mirrorCheck(rootOne->left, rootTwo->right) && mirrorCheck(rootOne->right, rootTwo->left);
 }
 
-int main(){
-	Node *rootOne= newNode(1);
-	rootOne->left=newNode(2);
-	rootOne->right=newNode(3);
-	rootOne->left->left=newNode(4);
-	rootOne->left->right=newNode(5);
-	rootOne->right->left=newNode(6);
-	rootOne->right->right=newNode(7);
-	
-	Node *rootTwo= newNode(1);
-	rootTwo->left=newNode(3);
-	rootTwo->right=newNode(2);
-	rootTwo->left->left=newNode(7);
-	rootTwo->left->right=newNode(6);
-	rootTwo->right->left=newNode(5);
-	rootTwo->right->right=newNode(4);
+bool symmetricCheck(Node *root){
+	if(root==NULL) return true;
+	return mirrorCheck(root->left, root->right);
+}
 
-	bool ans=mirrorCheck(rootOne, rootTwo);
+int main(){
+	Node *root= newNode(1);
+	root->left=newNode(2);
+	root->right=newNode(2);
+	root->left->left=newNode(3);
+	root->left->right=newNode(4);
+	root->right->left=newNode(4);
+	root->right->right=newNode(3);
+	bool ans=symmetricCheck(root);
 	cout<<ans;
 	cout<<endl;
 }
