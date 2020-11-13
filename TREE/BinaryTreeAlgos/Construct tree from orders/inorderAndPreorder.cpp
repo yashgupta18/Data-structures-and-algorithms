@@ -26,31 +26,28 @@ void inorderPrint(Node* root){
 	inorderPrint(root->right);
 }
 
-int findInorder(int inorder[], int num, int s, int e){
-	for (int i = s; i <= e; ++i)
-	{
-		if(inorder[i]==num){
-			return i;
-		}
-	}
-}
 
-Node* constructTree(int preorder[], int inorder[], int &start, int s, int e){
+Node* constructTree(int preorder[], unordered_map<int,int> mp, int &start, int s, int e){
 	if(s>e) return NULL;
 
 	Node* root = newNode(preorder[start]);
-	int mid=findInorder(inorder, preorder[start], s,e);
+	int mid = mp[preorder[start]];
 	start++;
-	root->left= constructTree(preorder, inorder, start, s, mid-1);
-	root->right= constructTree(preorder, inorder, start, mid+1, e);
+	root->left= constructTree(preorder, mp, start, s, mid-1);
+	root->right= constructTree(preorder, mp, start, mid+1, e);
 	return root;
 }
 
 int main(){
 	int preorder[6]={1,2,4,5,3,7};
 	int inorder[6]={4,2,5,1,3,7};
+	unordered_map<int,int> mp;
+	for (int i = 0; i < 6; ++i)
+	{
+		mp[inorder[i]]=i;
+	}
 	int start=0;
-	Node* tree=constructTree(preorder, inorder, start, 0, 5);
+	Node* tree=constructTree(preorder, mp, start, 0, 5);
 	inorderPrint(tree);
 
 	return 0;
