@@ -1,17 +1,15 @@
+
+#include<stdio.h>
+#include<string.h>
 #include<iostream>
-#include<map>
+// #include<algorithm>
 #include<string>
-#include<cstring>
-#include<stack>
-#include<list>
-#include<unordered_map>
-#include<queue>
 
 using namespace std;
 	
-string hi="Hello";
-string first="The coding";
-string last="Library";
+// string hi="Hello";
+// string first="The coding";
+// string last="Library";
 
    // https://www.geeksforgeeks.org/stdstring-class-in-c/
 int main(){
@@ -79,14 +77,10 @@ int main(){
 
 
 
-	string s23 = "hellloo";
-	string newString="";
-	string dot = ".";
-	for (int i = 0; i < s23.length(); ++i)
-	{
-		newString=newString+s23[i]+".";
-	}
-	cout<<newString;
+	char s1[]="aaa";
+	char s2[] ="aac";
+	int result=strcmp(s1,s2);
+	cout<<result;
 
 	return 0;
 }
