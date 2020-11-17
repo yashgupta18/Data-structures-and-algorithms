@@ -10,18 +10,11 @@
 using namespace std;
 
 int main(){
-	unsigned int w;
-	cin>>w;
-	if(w==2){
-		cout<<"NO";
+	int n,c0,c1, h,t;
+	string s;
+	cin>>t;
+	while(t){
+		cin>>n>>c0>>c1>>h;
+		cin>>s;
 	}
-	else if(w%2==0){
-		cout<<"YES";
-	}
-
-	else{
-		cout<<"NO";
-	}
-
-	return 0;
 }
