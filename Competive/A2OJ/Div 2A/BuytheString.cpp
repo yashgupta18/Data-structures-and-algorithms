@@ -26,53 +26,28 @@ int buy(int n, int c0, int c1, int h, string s){
         }
 	}
 
-	long long int sum=n0*c0 + n1*c1;
+	long long int sum;
 	int count=0;
-	for (int i = 0; i < s.length(); ++i)
-	{
-		if(s[i]=='0'){
-			long long int tempSum=0;
-			s[i]='1';
-			n1++;
-			n0--;
-			count++;
-			tempSum=n0*c0 + n1*c1 + count*h;
-			if(tempSum>sum){
-				n1--;
-				n0++;
-				s[i]='0';
-				break;
-			}
-			else{
-				sum=tempSum;
-			}
-		}
-		
-	}
-	count=0;
 
-	for (int i = 0; i < s.length(); ++i)
-	{
-		if(s[i]=='1'){
-			int tempSum=0;
-			s[i]='0';
-			n0++;
-			n1--;
-			count++;
-			tempSum=n0*c0 + n1*c1 + count*h;
-			if(tempSum>sum){
-				n0--;
-				n1++;
-				s[i]='1';
-				break;
-			}
-			else{
-				sum=tempSum;
-				
-			}
+	if(c0<c1){
+		sum=n0*c0;
+		if((c0+h) < c1){
+			sum+=(n1*(c0+h));
 		}
-		
+		else{
+			sum+=n1*c1;
+		}
 	}
+	else{
+		sum=n1*c1;
+		if((c1+h) < c0){
+			sum+=(n0*(c1+h));
+		}
+		else{
+			sum+=n0*c0;
+		}
+	}
+	
 	return sum;
 }
 
