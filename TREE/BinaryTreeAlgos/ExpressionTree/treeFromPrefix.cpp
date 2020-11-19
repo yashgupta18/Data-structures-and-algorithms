@@ -60,18 +60,30 @@ ExpressionTree* constructTree(char postfix[])
  
     return t;
 }
-void preorder(ExpressionTree* root){
-	if(root==NULL) return;
+void postr(node* p) 
+{ 
+    if (p == NULL) { 
+        return; 
+    } 
+    else { 
+        postr(p->left); 
+        postr(p->right); 
+        printf("%c ", p->data); 
+    } 
+} 
 
-	cout<<root->data;
-	preorder(root->left);
-	preorder(root->right);
-}
-
-int main(){
-	char prefix[] = '*+34/76';
-	et* r = constructTree(postfix);
-}
+int main() 
+{ 
+    node* s = NULL; 
+    char a[] = "*+ab-cd"; 
+    add(&s, a); 
+    printf("The Infix expression is:\n "); 
+    inr(s); 
+    printf("\n"); 
+    printf("The Postfix expression is:\n "); 
+    postr(s); 
+    return 0; 
+} 
 
 
 
