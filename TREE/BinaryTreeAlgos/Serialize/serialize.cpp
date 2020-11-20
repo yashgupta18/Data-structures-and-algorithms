@@ -20,7 +20,7 @@ struct Node *newNode(int item)
 }
 
 
-void RootToLeafSum(Node* root, vector<int> &ans){
+void serialize(Node* root, vector<int> &ans){
 	// ansector<int> ;
 	if(root==NULL) {
 		ans.push_back(-1);
@@ -29,8 +29,8 @@ void RootToLeafSum(Node* root, vector<int> &ans){
 
 	ans.push_back(root->data);
 
-	RootToLeafSum(root->left,ans);
-	RootToLeafSum(root->right, ans);
+	serialize(root->left,ans);
+	serialize(root->right, ans);
 	// return v;
 }
 
@@ -45,7 +45,7 @@ int main(){
 	root->right->right=newNode(7);
 	
 	vector<int> ans;
-	RootToLeafSum(root,ans);
+	serialize(root,ans);
 	for (int i = 0; i < ans.size(); ++i)
 	{
 		cout<<ans[i]<<endl;
