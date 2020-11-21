@@ -26,7 +26,7 @@ void traverse(Node* head){
 	}
 }
 
-Node *reverse (Node *head, int k)  
+Node *kreverse (Node *head, int k)  
 {  
     	if(head==NULL||k==1) return head;
         Node *dummy = newNode(0);
@@ -47,11 +47,27 @@ Node *reverse (Node *head, int k)
                 nex->next = pre->next;
                 pre->next = nex;
                 nex=cur->next;
+                cout<<i<<endl;
+                traverse(head);
+                cout<<endl;
             }
             pre = cur;
             count-=k;
         }
         return dummy->next;
+}
+
+Node* reverse(Node* head){
+	Node* dummy=NULL;
+
+	while(head!=NULL){
+		Node *nex=head->next;
+		head->next=dummy;
+		dummy=head;
+		head=nex;
+	}
+
+	return dummy;
 }
 
 int main(){
@@ -63,11 +79,15 @@ int main(){
 	head->next->next->next->next->next=newNode(6);
 	head->next->next->next->next->next->next=newNode(7);
 	head->next->next->next->next->next->next->next=newNode(8);
-	// head->next->next->next->next->next->next->next->next=newNode(9);
-	int k=3;
-	traverse(head);
-	cout<<endl;
-	head=reverse(head,k);
-	traverse(head);
+
+	// head=reverse(head);
+	// traverse(head);
+	// int k=3;
+	// cout<<"Before Reverse"<<endl;
+	// traverse(head);
+	// cout<<endl;
+	// head=kreverse(head,k);
+	// cout<<"After Reverse"<<endl;
+	// traverse(head);
 
 }
