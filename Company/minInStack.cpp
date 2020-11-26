@@ -9,43 +9,33 @@
 #include<map>
 using namespace std;
 
-  stack<int>s;
-    int min;
+class MinStack {
+  
+public:
+    /** initialize your data structure here. */
+    stack<int>s;
+    stack<int>ss;
     MinStack() {
         
     }
     
     void push(int x) {
-        if(s.size()==0){
-            s.push(x);
-            min=x;
-        }
-        else{
-            if(x>min){
-                s.push(x);
-            }
-            else if(x<min){
-                int y=2*x-min;
-                min= x;
-                s.push(y);
-            }
-        }
-        return;
+        s.push(x);
+        if(ss.size()==0 || ss.top()>=x){
+            ss.push(x);
+            return;
         }
         
-    
+    }
     
     void pop() {
         if(s.size()==0){
             return ;
         }
-        else if(s.top()>=min)
-            s.pop();
-        
-        else if(s.top()<min){
-            min=2*min-s.top();
-                s.pop();
-               
+        int ans= s.top();
+        s.pop();
+            if(ss.top()==ans){
+                ss.pop();
             }
         // return ans;
     }
@@ -54,21 +44,16 @@ using namespace std;
         if(s.size()==0){
             return -1;
         }
-        else{
-            if(s.top()>=min)
-                return s.top();
-            else if(s.top()<min)
-                return min;
-        }  
+        return s.top();
     }
     
     int getMin() {
         if(ss.size()==0){
             return -1;
         }
-        
-        return min;
+        return ss.top();
     }
+};
 
 // Driver function 
 // int main() 
