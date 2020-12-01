@@ -28,11 +28,12 @@ void preOrder(Node* root){
 
 void invert(Node* root){
 	if(!root) return;
+	invert(root->left);
+	invert(root->right);
+
 	Node* temp=root->left;
 	root->left=root->right;
 	root->right=temp;
-	invert(root->left);
-	invert(root->right);
 }
 
 int main(){
@@ -47,6 +48,9 @@ int main(){
 	cout<<"Before Inversion"<<endl;
 	preOrder(root);
 	cout<<endl;
+
+	invert(root);
+	
 	cout<<"After Inversion"<<endl;
 	preOrder(root);
 	cout<<endl;

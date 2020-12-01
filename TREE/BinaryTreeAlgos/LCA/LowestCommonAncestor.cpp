@@ -20,14 +20,23 @@ struct Node *newNode(int item)
 }
 
 
-Node* LCA(Node* root, int a, int b){
+Node* LCA(Node* root, int a, int b, bool &v1, bool &v2){
+	// use of v1 and v2 to check both the nodes are present in tree
+
 	if(!root) return NULL;
 
 	//if root is one of a or b
-	if(root->data == a || root->data==b) return root;
+	if(root->data == a ){
+		v1=true;
+		return root;
+	}
+	if(root->data==b){
+		v2=true;
+		return root;
+	} 
 
-	Node* l=LCA(root->left, a, b);
-	Node* r=LCA(root->right, a, b);
+	Node* l=LCA(root->left, a, b, v1,v2);
+	Node* r=LCA(root->right, a, b, v1,v2);
 		
 	// if l and r both return something then root is ans
 	if(l && r) return root;
@@ -42,6 +51,14 @@ Node* LCA(Node* root, int a, int b){
 	return NULL;
 }
 
+int findNode(Node* root, int k){
+	if(root==NULL) return false;
+	if(root->data==k || findNode(root->left, k) || findNode(root->right, k)){
+		return true;
+	}
+
+	return false;
+}
 
 int main(){
 	Node *root= newNode(1);
@@ -52,8 +69,17 @@ int main(){
 	root->right->left=newNode(6);
 	root->right->right=newNode(7);
 
-	Node* ans= LCA(root,5,6);
-	cout<<"Ans="<<ans->data<<endl;
+	bool v1=false, v2=false;
+	int val1=1, val2=4;
+
+	Node* ans= LCA(root,val1,val2, v1,v2);
+
+	if((v1&&v2) || (v1 && findNode(root, val1)) || (v2 && findNode(root, val2))){
+		cout<<"Ans="<<ans->data<<endl;
+	}else{
+		cout<<"No ans";
+	}
+	
 }
 
 
