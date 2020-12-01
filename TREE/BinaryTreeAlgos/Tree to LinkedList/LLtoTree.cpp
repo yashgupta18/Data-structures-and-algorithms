@@ -33,11 +33,14 @@ struct List *newList(int item)
 }
 
 void LLtoTree(List* head, vector<Node*> &v){
+	// convert all LL nodes to tree nodes and also push them to vector
 	while(head!=NULL){
 		Node* temp = newNode(head->data);
 		v.push_back(temp);
 		head=head->next; 
 	}
+
+	// now just assign left and right of each node in vector
 	int n=v.size();
 	for (int i = 0; i < n/2; ++i)
 	{

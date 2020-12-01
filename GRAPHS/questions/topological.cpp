@@ -25,7 +25,6 @@ void printAdjList(vector<int> adj[], int V){
 }
 
 void dfs(vector<int> adj[], bool vis[], int start, stack<int> &s){
-	cout<<start<<endl;
 	vis[start]=true;
 	for(auto node:adj[start]){
 		if(!vis[node]){
@@ -38,14 +37,14 @@ void dfs(vector<int> adj[], bool vis[], int start, stack<int> &s){
  
 
 int main(){
-	int V=5;
+	int V=6;
 	vector<int> adj[V];
-	addEdge(adj, 0, 5); 
-    addEdge(adj, 0, 2); 
+	addEdge(adj, 5, 2); 
+    addEdge(adj, 5, 0); 
+    addEdge(adj, 4, 0); 
+    addEdge(adj, 4, 1); 
     addEdge(adj, 2, 3); 
     addEdge(adj, 3, 1); 
-    addEdge(adj, 4, 1); 
-    addEdge(adj, 4, 5); 
    
 
 	// printAdjList(adj, V);
@@ -53,10 +52,13 @@ int main(){
 
 	stack<int> s;
 	bool vis[V];
+	// bool* vis = new bool[V]; 
 	for (int i = 0; i < V; ++i)
 	{
 		vis[i]=false;
 	}
+
+
 
 	for (int i = 0; i < V; ++i)
 	{
@@ -64,11 +66,6 @@ int main(){
 			dfs(adj, vis, i,s);
 		}
 	}
-	
-				
-	
-
-	// dfs(adj, V,vis, 0, s);	
 	
 	while(!s.empty()){
 		int stop=s.top();

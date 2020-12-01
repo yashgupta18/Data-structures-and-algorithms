@@ -29,14 +29,16 @@ void inorderPrint(Node* root){
 
 vector<int> find(vector<int> inorder, int n1, int n2){
 	vector<int> v;
+	// cout<<"n1="<<n1<<endl;
+	// cout<<"n2="<<n2<<endl;
 	for (int i = n1; i < n2; ++i)
 	{
+		// cout<<i<<" ";
 		v.push_back(inorder[i]);
 	}
 
 	return v;
 }
-
 
 
 Node* constructTree(vector<int> levelorder, vector<int> inorder, unordered_map<int,int> mp){
@@ -46,19 +48,30 @@ Node* constructTree(vector<int> levelorder, vector<int> inorder, unordered_map<i
 
 	int mid = mp[levelorder[0]];
 
-	vector<int> left=find(inorder, 0, mid-1);
-	vector<int> right=find(inorder, mid+1, inorder.size()-1);
+	vector<int> left=find(inorder, 0, mid);
+	vector<int> right=find(inorder, mid+1, inorder.size());
 
 	vector<int> vectorLeft; 
-	vectorLeft.insert(vectorLeft.begin(), vectorLeft.begin(), vectorLeft.begin()+mid-1);
-
+	for (int i = 0; i <left.size(); ++i)
+	{
+		vectorLeft.push_back(left[i]);
+	}
 
 	vector<int> vectorRight;
-	vectorRight.insert(vectorRight.begin(), vectorRight.begin()+mid+1, vectorRight.end());
+	for (int i = 0; i < right.size(); ++i)
+	{
+		vectorRight.push_back(right[i]);
+	}
+
+	for (int i = 0; i < vectorLeft.size(); ++i)
+	{
+		cout<<vectorLeft[i]<<" ";
+	}
+	cout<<endl;
 
 
-	root->left=constructTree(left,vectorLeft,mp);
-	root->right=constructTree(right, vectorRight, mp);
+	// root->left=constructTree(left,vectorLeft,mp);
+	// root->right=constructTree(right, vectorRight, mp);
 	return root;
 }
 
@@ -78,15 +91,16 @@ int main(){
 	inorder.push_back(1);
 	inorder.push_back(3);
 	inorder.push_back(6);	
-		
+	
+
 	unordered_map<int,int> mp;
 	for (int i = 0; i < 6; ++i)
 	{
 		mp[inorder[i]]=i;
 	}
 	int start=0;
-	Node* tree=constructTree(levelorder, inorder, mp);
-	inorderPrint(tree);
+	Node* root=constructTree(levelorder, inorder, mp);
+	inorderPrint(root);
 
 	return 0;
 }
