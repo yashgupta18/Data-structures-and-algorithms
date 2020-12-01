@@ -23,16 +23,23 @@ struct Node *newNode(int item)
 void K_distance_node(Node* root, map <Node*, Node*> &mp){
 	if(root==NULL) return;
 	//parent of left is current node
-	mp[root->left]=root;
+	if(root->left){
+		mp[root->left]=root;
+	}
 	K_distance_node(root->left, mp);
+	
+	if(root->right){
+		mp[root->right]=root;
+	}
 	K_distance_node(root->right, mp);
+	
+	// K_distance_node(root->right, mp);
 }
 
 
 void K_distance_root(Node* root, Node* target, int k){
 	map<Node*, Node*> mp;
 	K_distance_node(root, mp);
-
 	queue<pair<Node*, int> > q;
 	q.push(make_pair(target,k));
 	map<Node*, int> vis;

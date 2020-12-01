@@ -44,10 +44,10 @@ int main(){
 	bool isFound=false;
 	RootToLeafSum(root,curr_sum,sum, isFound);
 	if(isFound){
-		cout<<"Path exists";
+		cout<<"Sum Path exists";
 	}
 	else{
-		cout<<"No path";
+		cout<<"No Sum Path exists";
 	}
 	cout<<endl;
 }

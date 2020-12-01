@@ -44,17 +44,21 @@ int getSum(int l, int r, int ql, int qr,int segArr[], int pos){
 
 void updateVal(int segArr[],int l, int r, int P, int pos, int val){
 	if(l==r){
+		// if current pos has to be updated
 		segArr[pos]=val;
 		return;
 	} 
 
 	int mid=(l+r)/2;
 	if(P<=mid){
+		//element is on left subtree
 		updateVal(segArr,l,mid,P, 2*pos+1, val);
 	}
 	else{
+		//element is on right subtree
 		updateVal(segArr,mid+1,r,P, 2*pos+2, val);
 	}
+	//update the addition values
 	segArr[pos]=segArr[2*pos+1]+segArr[2*pos+2];
 }
 
