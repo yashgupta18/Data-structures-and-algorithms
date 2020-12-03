@@ -38,12 +38,13 @@ int coin_change_count(int arr[], int sum, int n)
     
     for (int i = 1; i <= n; i++) { 
         for (int j = 1; j <= sum; j++) { 
+            //if current coins value is less than sum j
             if(arr[i-1]<=j){
-                //first check if block can be filled without current no. OR it with if it can be filled with current no and remaining sum be filled from above
+                //check how many coins if current coin is selected + check if it can be filled without current i
                 t[i][j]=( t[i][j-arr[i-1]] + t[i-1][j] );
             }
             else{
-                //just use the above value from table
+                //just use the above value from table if coin value is greater than sum j
                 t[i][j]= t[i-1][j];
 
             }

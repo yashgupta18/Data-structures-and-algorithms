@@ -1,6 +1,9 @@
 #include<iostream>
 #include<vector>
 using namespace std;
+// You are given n activities with their start and finish times. Select the maximum number of activities
+// that can be performed by a single person, assuming that a person can only work on a single 
+// activity at a time.
 
 struct Activity{
 	int stime;
@@ -13,6 +16,7 @@ bool compare(Activity act1, Activity act2){
 
 void activity_selection(Activity arr[], int n){
 
+	//sort by ftime
 	sort(arr, arr+n, compare);
 	vector<pair<int,int> > result;
 	int temp=arr[0].ftime;

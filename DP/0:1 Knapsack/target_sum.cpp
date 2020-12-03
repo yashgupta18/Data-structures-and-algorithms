@@ -61,7 +61,7 @@ void subset_sum_count(int arr[], int sum, int n){
 		cout<<endl;
 	}
 	cout<<endl;
-	cout<<t[n][sum];
+	cout<<"Ans= "<<t[n][sum]<<" ways to achieve it.";
 	return;
 }
 

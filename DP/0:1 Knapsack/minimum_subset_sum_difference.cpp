@@ -64,6 +64,7 @@ void min_subset_sum_diff(int arr[], int n)
     int diff=INT_MAX;
     for (int i = (sum/2); i >=0; --i)
     {
+        //check if a subset for a particular sum exists which is closest to sum/2
        if(t[n][i]==1){
             diff=sum-2*i;
             break;

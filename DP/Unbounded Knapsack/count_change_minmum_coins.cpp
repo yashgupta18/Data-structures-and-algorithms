@@ -53,11 +53,11 @@ int coin_change_count(int arr[], int sum, int n)
 
                 // ****IMPORTANT STEP****
 
-                //add one if the coin is selected
+                //add one if the current coin at ith pos is selected or just copy value from above
                 t[i][j]=min( t[i][j-arr[i-1]] + 1 , t[i-1][j] );
             }
             else{
-                //just use the above value from table
+                //just use the above value from table as curr val of arr[i] is greater than the sum j
                 t[i][j]= t[i-1][j];
 
             }
