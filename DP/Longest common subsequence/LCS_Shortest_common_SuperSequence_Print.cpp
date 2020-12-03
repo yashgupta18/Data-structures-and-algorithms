@@ -108,9 +108,9 @@ void LCS(string X, string Y, int m, int n){
 }
 
 int main(){
-	string X="ACBCF";
+	string X="AGGTAB";
 	int m=X.length();
-	string Y="ABCDAF";
+	string Y="GXTXAYB";
 	int n=Y.length();
 	LCS(X,Y,m,n);
 }
