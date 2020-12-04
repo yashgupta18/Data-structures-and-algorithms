@@ -11,7 +11,7 @@ int coin_change_count(int arr[], int sum, int n)
 { 
     int i, j; 
     int t[n + 1][sum + 1]; 
-    
+    memset(t, 0, sizeof(t));
     for (int i = 1; i < n+1; i++) 
         t[i][0] = 0; 
 
@@ -21,21 +21,21 @@ int coin_change_count(int arr[], int sum, int n)
 
     //for setting 2nd row(only this ques exception) check notes
      // ****IMPORTANT STEP****
-    for (int j = 1; j < sum+1; ++j)
-    {
-        if((j%arr[0])==0){
-            t[1][j]=j%arr[0];
-        }
-        else{
-            t[i][j]=INT_MAX-1;
-        }
-    }
+    // for (int j = 1; j < sum+1; ++j)
+    // {
+    //     if((j%arr[0])==0){
+    //         t[1][j]=j%arr[0];
+    //     }
+    //     else{
+    //         t[1][j]=-1;
+    //     }
+    // }
     //for understanding
-    for (i = 1; i <= n; i++) { 
-        for (j = 1; j <= sum; j++) { 
-            t[i][j]=0;
-        } 
-    }
+    // for (i = 1; i <= n; i++) { 
+    //     for (j = 1; j <= sum; j++) { 
+    //         t[i][j]=0;
+    //     } 
+    // }
 
     cout<<"Before DP"<<endl;
     for (i = 0; i <= n; i++) { 
@@ -82,8 +82,8 @@ int coin_change_count(int arr[], int sum, int n)
 }
 
 int main(){
-	int arr[] ={ 1,2,3 };
-    int sum = 5; 
+	int arr[] ={ 1,5,7,9,11 };
+    int sum = 22; 
     int n = sizeof(arr) / sizeof(arr[0]); 
 	cout<<coin_change_count(arr,sum,n);
 

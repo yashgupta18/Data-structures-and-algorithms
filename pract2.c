@@ -1,118 +1,68 @@
-class Solution {
-public:
-    ////////////////Approach-1 starts here////////////////
-    void collectKDown(TreeNode* root, vector<int>& result, int K) {
-        if(!root || K < 0)
-            return;
-        if(K == 0) {
-            result.push_back(root->val);
-            return;
-        }
-        collectKDown(root->left, result, K-1);
-        collectKDown(root->right, result, K-1);
-    }
-    int collectKNodes(TreeNode* root, TreeNode* target, int K, vector<int>& result) {
-        if(!root)
-            return -1;
-        if(root == target) {
-            collectKDown(root, result, K);
-            return 0;
-        }
-        
-        int leftDist = collectKNodes(root->left, target, K, result);
-        
-        if(leftDist != -1) {
-            if(leftDist+1 == K) {
-                result.push_back(root->val);
-            } else {
-                collectKDown(root->right, result, K-2-leftDist);
-                //whye K-2-leftDist ?
-                //Ans: root->right is 2 edges away from root->left. So, K-2
-                //Also, target may be leftDist away from root->left, so that distance needs to be subtracted as well from K
-            }
-            return leftDist+1;
-            //why leftDist+1
-            //Ans: Because, when it recurses back, the distance of node (where recursion goes back)  from target node is +1 more
-        }
-        
-        int rightDist = collectKNodes(root->right, target, K, result);
-        
-        if(rightDist != -1) {
-            if(rightDist + 1 == K) {
-                result.push_back(root->val);
-            } else {
-                collectKDown(root->left, result, K-2-rightDist);
-            }
-            return rightDist+1;
-        }
-        
-        return -1;
-    }
-    ////////////////Approach-1 ends here////////////////
-    
-    ////////////////Approach-2 starts here////////////////
-    unordered_map<TreeNode*, TreeNode*> parent;
-    void collectKDistanceNodes(TreeNode* root, int K, vector<int>& result) {
-        set<int> st;
-        queue<TreeNode*> que;
-        que.push(root);
-        st.insert(root->val);
-        while(!que.empty()) {
-            int n = que.size();
-            if(K == 0)
-                break;
-            while(n--) {
-                TreeNode* curr = que.front();
-                que.pop();
-                
-                if(curr->left && !st.count(curr->left->val)) {
-                    que.push(curr->left);
-                    st.insert(curr->left->val);
-                }
-                if(curr->right && !st.count(curr->right->val)) {
-                    que.push(curr->right);
-                    st.insert(curr->right->val);
-                }
-                
-                if(parent.count(curr) && !st.count(parent[curr]->val)) {
-                    que.push(parent[curr]);
-                    st.insert(parent[curr]->val);
-                }
-            }
-            K--;
-        }
-        while(!que.empty()) {
-            result.push_back(que.front()->val);
-            que.pop();
-        }
-    }
-    void collectParent(TreeNode* root) {
-        if(!root)
-            return;
-        
-        if(root->left)
-            parent[root->left] = root;
-        collectParent(root->left);
-        
-        if(root->right)
-            parent[root->right] = root;
-        collectParent(root->right);
-    }
-    
-    ////////////////Approach-2 ends here////////////////
-    vector<int> distanceK(TreeNode* root, TreeNode* target, int K) {
-        vector<int> result;
-        if(!root)
-            return {};
-        if(K == 0)
-            return {target->val};
-        
-        //Approach-1
-        collectKNodes(root, target, K, result);
-        
-        //Approach-2
-        //collectParent(root);
-        //collectKDistanceNodes(target, K, result);
-        return result;
-    }
-};
+#include<iostream>
+#include<map>
+#include<list>
+#include<unordered_map>
+#include<map>
+#include<set>
+#include<queue>
+// #define V 5
+using namespace std;
+
+int maxSum(int arr[], int n){
+	int i, j, temp;
+	
+	
+
+	for(i=0; i<n-1; i++)
+	{	
+		for(j=i+1; j<n; j++)
+		{
+			if(arr[i] < arr[j])
+			{
+				temp=arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
+			}
+		}
+	}
+
+	for (int i = 0; i < n; ++i)
+	{
+		cout<<arr[i]<<" ";
+	}
+	
+// Now return sum of first 4 in the Array
+
+	int sum=0;
+
+	for(i=0; i<4; i++)
+	{ 
+		// cout<<a[i]<<endl;÷
+		sum+=arr[i];
+	}
+	return sum;
+}
+
+int main(){
+	int arr[]={0,0,2,3,7,1};
+	int n=sizeof(arr)/sizeof(arr[0]);
+	cout<<maxSum(arr,n);
+}
+
+// int Coindeterminer(int coinsArr[],int num) 
+// { 
+// 	 int n=sizeof(coinsArr)/sizeof(coinsArr[0]); 
+// 	 if(num<5) return num; 
+// 	 int count=num/11; 
+// 	if((num%11)%2==0){ 
+// 	 	return count+2; 
+// 	}
+// 	else{
+// 	 	return count+1; 	 	}
+// 	}
+
+// int main(){
+// 	int coinsArr[]={1,5,7,9,11};
+// 	int num=22;
+// 	cout<<Coindeterminer(coinsArr, num);
+// }

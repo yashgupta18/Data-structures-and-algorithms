@@ -69,8 +69,8 @@ int coin_change_count(int arr[], int sum, int n)
 }
 
 int main(){
-	int arr[] ={ 1,2,3 };
-    int sum = 5; 
+	int arr[] ={ 1,5,7,9,11 };
+    int sum = 16; 
     int n = sizeof(arr) / sizeof(arr[0]); 
 	cout<<coin_change_count(arr,sum,n);
 
