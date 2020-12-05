@@ -8,45 +8,16 @@
 // #define V 5
 using namespace std;
 
-int maxSum(int arr[], int n){
-	int i, j, temp;
-	
-	
 
-	for(i=0; i<n-1; i++)
-	{	
-		for(j=i+1; j<n; j++)
-		{
-			if(arr[i] < arr[j])
-			{
-				temp=arr[i];
-				arr[i]=arr[j];
-				arr[j]=temp;
-			}
-		}
-	}
-
-	for (int i = 0; i < n; ++i)
-	{
-		cout<<arr[i]<<" ";
-	}
-	
-// Now return sum of first 4 in the Array
-
-	int sum=0;
-
-	for(i=0; i<4; i++)
-	{ 
-		// cout<<a[i]<<endl;÷
-		sum+=arr[i];
-	}
-	return sum;
-}
 
 int main(){
-	int arr[]={0,0,2,3,7,1};
-	int n=sizeof(arr)/sizeof(arr[0]);
-	cout<<maxSum(arr,n);
+	int a[5]={1,2,3,4,5};
+	int i,j,k=1,m;
+	i=++a[1];
+	j=a[1]++;
+	m=a[i++];
+
+	cout<<i<<j<<m;
 }
 
 // int Coindeterminer(int coinsArr[],int num) 
