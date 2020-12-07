@@ -65,9 +65,9 @@ void rod_cutting(int price[], int length[], int rod_length, int n){
 
 int main(){
 	int price[]={1,5,8,9,10,17,17,20};
-	int length[]={1,2,3,4,5,6,7,8};
+	int length[]={1,2,3,4,5,6,7,8,9,10};
 	int n=sizeof(length)/sizeof(length[0]);
-	int rod_length=8;
+	int rod_length=9;
 
 	rod_cutting(price, length, rod_length, n);
 }
