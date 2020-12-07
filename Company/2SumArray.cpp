@@ -29,9 +29,9 @@ void sumFind(int arr[], int n, int sum){
 // Driver Code
 int main()
 {
-   int arr[] = {12, 3, 6, 1, 6, 9};
+   int arr[] = {0, -1, 2, -3, 1};
    int n=sizeof(arr)/sizeof(arr[0]);
-   int sum=21;
+   int sum=-2;
    sumFind(arr, n, sum);
     return 0;
 }
