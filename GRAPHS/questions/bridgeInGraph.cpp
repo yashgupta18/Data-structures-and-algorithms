@@ -47,6 +47,11 @@ public:
 
 	// https://www.geeksforgeeks.org/bridge-in-a-graph/
 	// a bridge is an edge removing which increases number of disconnected components.
+
+	// In DFS tree, a vertex u is articulation point if one of the following two conditions is true.
+	// 1) u is root of DFS tree and it has at least two children.
+	// 2) u is not root of DFS tree and it has a child v such that no vertex in subtree rooted with v has a back edge to one of the ancestors (in DFS tree) of u.
+
 	void dfs(int u,bool vis[],int low[],int disc[],int parent[], int &time){
 	vis[u]=true;
 	low[u]=disc[u]=++time;
@@ -55,11 +60,30 @@ public:
 		if(!vis[v]){
 			parent[v]=u;
 			dfs(v, vis, low, disc, parent,time);
-			low[u]=min(low[u], low[v]);
+
+			// Check if the subtree rooted with v has a  
+            // connection to one of the ancestors of u 
+            low[u]  = min(low[u], low[v]); 
+  
+            // If the lowest vertex reachable from subtree  
+            // under v is  below u in DFS tree, then u-v  
+            // is a bridge 
 			if(low[v]>disc[u]){
 				cout<<u<<" "<<v<<endl;
 			}
+
+			// FOR ARTICULATION uncomment below 2 points and comment line 71-73 and add a children variable
+			// // (1) u is root of DFS tree and has two or more chilren. 
+   //          if (parent[u] == NIL && children > 1) 
+   //             ap[u] = true; 
+  
+   //          // (2) If u is not root and low value of one of its child is more 
+   //          // than discovery value of u. 
+   //          if (parent[u] != NIL && low[v] >= disc[u]) 
+   //             ap[u] = true;
+
 		}
+		
 		else if(v!=parent[u]){
 			low[u]=min(low[u], disc[v]);
 		}
