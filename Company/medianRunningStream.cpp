@@ -8,7 +8,7 @@
 using namespace std; 
 
 
-double findMedian(priority_queue<double> firstQ , priority_queue<double,vector<double>,greater<double> > secQ) {
+double printMedians(priority_queue<double> firstQ , priority_queue<double,vector<double>,greater<double> > secQ) {
         if(firstQ.size() == secQ.size()) {
             if(firstQ.empty()){
                 return 0;
@@ -28,7 +28,7 @@ double findMedian(priority_queue<double> firstQ , priority_queue<double,vector<d
         }    
     }
 
-void printMedians(double arr[], int n){
+void findMedian(double arr[], int n){
     //Points to remember
     // heap size should have max size 1 greater than another. We need to always keep it balanced.
     priority_queue<double> firstQ; //maxHeap
@@ -51,7 +51,7 @@ void printMedians(double arr[], int n){
             firstQ.push(secQ.top());
             secQ.pop();
         }
-        cout<<findMedian(firstQ, secQ)<<" ";
+        cout<<printMedians(firstQ, secQ)<<" ";
     }
 }
 
@@ -61,7 +61,7 @@ int main()
     // stream of integers 
     double arr[] = {5, 15, 10, 20, 3}; 
     int n = sizeof(arr)/sizeof(arr[0]); 
-    printMedians(arr, n);
+    findMedian(arr, n);
 
     return 0; 
 } 
