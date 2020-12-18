@@ -21,17 +21,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
-
 using namespace std;
-
-#define SCD(t) scanf("%d",&t)
-#define SCLD(t) scanf("%ld",&t)
-#define SCLLD(t) scanf("%lld",&t)
-#define SCC(t) scanf("%c",&t)
-#define SCS(t) scanf("%s",t)
-#define SCF(t) scanf("%f",&t)
-#define SCLF(t) scanf("%lf",&t)
-
+ 
 #define ff              first
 #define ss              second
 #define int             long long
@@ -40,7 +31,6 @@ using namespace std;
 #define endl			"\n"
 #define pb              push_back
 #define pii             pair<ll,ll>
-#define vi              vector<int>
 #define vi              vector<ll>
 #define vs				vector<string>
 #define mii             map<int,int>
@@ -60,22 +50,40 @@ using namespace std;
 #define ps(x,y)         fixed<<setprecision(y)<<x
 #define mk(arr,n,type)  type *arr=new type[n];
 #define w(x)            int x; cin>>x; while(x--)
-mt19937                 rng(chrono::steady_clock::now().time_since_epoch().count());
+// mt19937                 rng(chrono::steady_clock::now().time_since_epoch().count());
  
-typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
+// typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
  
  
-void c_p_c()
+void file_i_o()
 {
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-#ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-#endif
+    ios_base::sync_with_stdio(0); 
+    cin.tie(0); 
+    cout.tie(0);
+	#ifndef ONLINE_JUDGE
+	    freopen("input.txt", "r", stdin);
+	    freopen("output.txt", "w", stdout);
+	#endif
 }
  
 int32_t main()
 {
-    c_p_c();
+    clock_t begin = clock();
+    // file_i_o();
+	// Write your code here....
+
+	// int tc;
+	// tc = read(int);
+
+	// while(tc--){
+	// 	write(tc);
+	// }
+	cout<<"hel";
+
+	#ifndef ONLINE_JUDGE 
+	  clock_t end = clock();
+	  cout<<"\n\nExecuted In: "<<double(end - begin) / CLOCKS_PER_SEC*1000<<" ms";
+	#endif 
+
     return 0;
 }
