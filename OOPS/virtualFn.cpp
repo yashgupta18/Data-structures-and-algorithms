@@ -1,26 +1,41 @@
-#include<iostream> 
+#include <iostream> 
 using namespace std; 
   
-class Base 
-{ 
-   int x; 
+class base { 
 public: 
-    virtual void fun() = 0; 
-    int getX() { return x; } 
+    virtual void print() 
+    { 
+        cout << "print base class" << endl; 
+    } 
+  
+    void show() 
+    { 
+        cout << "show base class" << endl; 
+    } 
 }; 
   
-// This class inherits from Base and implements fun() 
-class Derived: public Base 
-{ 
-    int y; 
+class derived : public base { 
 public: 
-    void fun() { cout << "fun() called"; } 
+    void print() 
+    { 
+        cout << "print derived class" << endl; 
+    } 
+  
+    void show() 
+    { 
+        cout << "show derived class" << endl; 
+    } 
 }; 
   
-int main(void) 
+int main() 
 { 
-    Derived d; 
-    d.fun();
-    cout<<d.getX(); 
-    return 0; 
+    base* bptr; 
+    derived d; 
+    bptr = &d; 
+  
+    // virtual function, binded at runtime 
+    bptr->print(); 
+  
+    // Non-virtual function, binded at compile time 
+    bptr->show(); 
 } 
