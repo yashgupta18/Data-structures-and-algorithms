@@ -12,22 +12,6 @@ using namespace std;
 
 int countRabbits(int arr[], int n){
 	
-	unordered_map<int, int> mp;
-	for (int i = 0; i < n; ++i)
-	 {
-	 	// key is keykey+1
-	 	//and increasing count++;
-	 	mp[arr[i]+1]++;
-	 } 
-
-	 int totalSum=0;
-	 for(auto j:mp){
-	 	float groupSize=j.first;
-	 	float reportees=j.second;
-	 	int totalPerColor=ceil(reportees/groupSize);
-	 	totalSum+=totalPerColor*groupSize;
-	 }
-	return totalSum;
 }
 
 int main(){
