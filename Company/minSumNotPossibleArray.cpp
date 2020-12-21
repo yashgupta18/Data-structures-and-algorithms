@@ -8,7 +8,8 @@
 using namespace std; 
 
 
-//make 2 arr to store max of left and right of current index
+// Q.Find the smallest positive integer value that cannot be represented as sum of any subset of a given array
+// Explaination https://medium.com/dexters-lab/eli5-find-the-smallest-positive-integer-value-that-cannot-be-represented-as-sum-of-any-subset-of-f8ea2488184b
 
 int minSum(int arr[], int n){
     int maxPossible=0;
