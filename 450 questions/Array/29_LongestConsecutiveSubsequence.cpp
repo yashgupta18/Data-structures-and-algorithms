@@ -11,6 +11,7 @@
 #include <stack>
 #include <map>
 #include <set>
+#include <unordered_set>
 #include <functional>
 #include <numeric>
 #include <utility>
@@ -49,7 +50,7 @@ using namespace std;
 #define mod             1000000007
 #define inf             1e18
 #define ps(x,y)         fixed<<setprecision(y)<<x
-#define logarr(arr,a,b)	for(int z=(a);z<=(b);z++) cout<<(arr[z])<<" ";cout<<endl;	
+#define logarr(arr,a,b)	for(int z=(a);z<(b);z++) cout<<(arr[z])<<" ";cout<<endl;	
 
 #define mk(arr,n,type)  type *arr=new type[n];
 #define w(x)            int x; cin>>x; while(x--)
@@ -68,20 +69,41 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
- 
+
+
+int findLongestConseqSubseq(int arr[], int n){
+	set<int> s;
+	for (int i = 0; i < n; ++i)
+	{
+		s.insert(arr[i]);
+	}
+	int ans=0,count=0;
+	for (int i = 0; i < n; ++i)
+	{
+		if(s.find(arr[i]-1)==s.end()){
+			int j = arr[i];
+			while(s.find(j)!=s.end()){
+				count++;
+				j++;
+				
+			}
+			ans=max(ans,count);
+			count=0;
+		}
+	}
+
+	return ans;
+}
+
+
 int32_t main()
 {
     clock_t begin = clock();
-    // file_i_o();
-	// Write your code here....
 
-	// int tc;
-	// tc = read(int);
-
-	// while(tc--){
-	// 	write(tc);
-	// }
-	cout<<"hel";
+    //EXPLAINATION:  https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2471/Very-concise-O(log(min(MN)))-iterative-solution-with-detailed-explanation
+    int arr[] = { 1, 9, 3, 10, 4, 20, 2 }; 
+    int n = as(arr); 
+    cout << "Length of the Longest contiguous subsequence is "<< findLongestConseqSubseq(arr, n); 
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

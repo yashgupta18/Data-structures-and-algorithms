@@ -8,8 +8,10 @@
 #include <bitset>
 #include <iterator>
 #include <list>
+// #include <boost/functional/hash.hpp> 
 #include <stack>
 #include <map>
+#include <unordered_map>
 #include <set>
 #include <functional>
 #include <numeric>
@@ -35,7 +37,7 @@ using namespace std;
 #define vi              vector<ll>
 #define vs				vector<string>
 #define mii             map<int,int>
-#define mp 				make_pair
+// #define mp 				make_pair
 #define all(n) 			n.begin(),n.end()
 #define ump				unordered_map
 #define pq_max          priority_queue<ll>
@@ -56,8 +58,20 @@ using namespace std;
 // mt19937                 rng(chrono::steady_clock::now().time_since_epoch().count());
  
 // typedef tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update> pbds;
- 
- 
+struct hashfunc
+{
+	size_t operator() (const pair<int,int>& l) const
+	{ 
+		return l.first ^ l.second; 
+	}	
+};
+
+int gcd(int a, int b){
+    if (b == 0)
+       return a;
+    return gcd(b, a % b); 
+}
+
 void file_i_o()
 {
     ios_base::sync_with_stdio(0); 
@@ -68,20 +82,46 @@ void file_i_o()
 	    freopen("output.txt", "w", stdout);
 	#endif
 }
- 
+
+int maxPointOnSameLine(vector< pair<int, int> > points){
+	unordered_map< pair< int,int >,int,hashfunc > mp;
+	int n=points.size(), result=0, count=0, overlap=0, verticalPoints=0;
+	loop(i,0,n){
+		count=0, overlap=0, verticalPoints=0;
+		
+		loop(j,1,n){
+			if(points[j].second==points[i].second && points[j].first==points[i].first)
+				overlap++;
+
+			else{
+				int dx=points[j].second-points[i].second;
+				int dy=points[j].second- points[i].first;
+				int g=gcd(dx, dy);
+				dx/=g;
+				dy/=g;
+				mp[make_pair(dx,dy)]++;
+				count=max(count, mp[make_pair(dx,dy)]);
+			}
+		}
+		count=max(count, verticalPoints); 
+	}
+	result=max(result, count+overlap+1);
+	return result;
+}
+
 int32_t main()
 {
     clock_t begin = clock();
-    // file_i_o();
-	// Write your code here....
-
-	// int tc;
-	// tc = read(int);
-
-	// while(tc--){
-	// 	write(tc);
-	// }
-	cout<<"hel";
+    // https://www.geeksforgeeks.org/count-maximum-points-on-same-line/
+    const int N = 6; 
+    int arr[N][2] = {{-1, 1}, {0, 0}, {1, 1}, 
+                    {2, 2}, {3, 3}, {3, 4} }; 
+  
+    vector< pair<int, int> > points; 
+    for (int i = 0; i < N; i++) 
+        points.push_back(make_pair(arr[i][0], arr[i][1])); 
+  
+    cout << maxPointOnSameLine(points) << endl; 
 
 	#ifndef ONLINE_JUDGE 
 	  clock_t end = clock();

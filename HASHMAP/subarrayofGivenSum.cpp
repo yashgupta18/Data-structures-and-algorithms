@@ -89,7 +89,7 @@ int subArrayCount(int arr[], int n, int sum){
 int32_t main()
 {
     clock_t begin = clock();
-    
+    // https://www.youtube.com/watch?v=20v8zSo2v18
     int arr[]={10, 2, -2, -20, 10};
     int n=as(arr);
     int sum=-10;
