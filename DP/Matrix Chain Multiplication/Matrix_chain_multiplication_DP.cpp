@@ -22,15 +22,15 @@ int matrix_chain_mltiplication(int arr[], int i, int j){
 		// temp= sum of multiplying-- c1=A*b , c2= C*D, c3=(A*B) + (C*D)
 		int  temp = matrix_chain_mltiplication(arr,i,k) + matrix_chain_mltiplication(arr, k+1, j) + (arr[i-1]*arr[k]*arr[j]);
 		//if new temp value is less than old min than update min
-		ans=min(ans,temp); 
+		ans=min(ans,temp);
 	}
-	t[i][j]=ans; 
+	t[i][j]=ans;
 	return ans;
 }
 
 
 int main(){
-	int arr[]={ 40, 20, 30, 10, 30 }; 
+	int arr[]={ 1, 2, 3, 4, 3 };
 	int n= sizeof(arr)/sizeof(arr[0]);
 	
 	//OUTPUT Explaination
@@ -42,16 +42,16 @@ int main(){
   	memset(t, -1, sizeof t);
 	cout<<matrix_chain_mltiplication(arr,1,n-1)<<endl;
 
-	// cout<<"After DP"<<endl;
-	// for (int p = 0; p < n; ++p)
-	// {
-	// 	for (int q = 0; q < n; ++q)
-	// 	{
-	// 		cout<<t[p][q]<<" ";
-	// 	}
-	// 	cout<<endl;
-	// }
-	// cout<<endl;
+	cout<<"After DP"<<endl;
+	for (int p = 0; p < n; ++p)
+	{
+		for (int q = 0; q < n; ++q)
+		{
+			cout<<t[p][q]<<" ";
+		}
+		cout<<endl;
+	}
+	cout<<endl;
 	return 0;
 
 
