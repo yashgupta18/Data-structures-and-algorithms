@@ -100,7 +100,6 @@ int32_t main()
 {
     clock_t begin = clock();
 
-    //EXPLAINATION:  https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2471/Very-concise-O(log(min(MN)))-iterative-solution-with-detailed-explanation
     int arr[] = { 1, 9, 3, 10, 4, 20, 2 }; 
     int n = as(arr); 
     cout << "Length of the Longest contiguous subsequence is "<< findLongestConseqSubseq(arr, n); 

@@ -91,8 +91,6 @@ bool tripletSumFind(int arr[], int n, int sum){
 int32_t main()
 {
     clock_t begin = clock();
-
-    //EXPLAINATION:  https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/2471/Very-concise-O(log(min(MN)))-iterative-solution-with-detailed-explanation
     int arr[] = { 1, 4, 45, 6, 10, 8 }; 
     int sum=22;
     int n=sizeof(arr)/sizeof(arr[0]);
