@@ -20,15 +20,25 @@ int find_set(int u, int parent[]){
     return parent[u];
   }
   else{
-    return find_set(parent[u], parent);
+    return parent[u]=find_set(parent[u], parent);
   }
 }
 
-int unionSet(int u, int v, int parent[]){
+void unionSet(int u, int v, int parent[], int rank[]){
   int u_set=find_set(u, parent);
   int v_set=find_set(v, parent);
 
   if(u_set!=v_set){
+    parent[v_set]=u_set;
+  }
+
+  if(rank[u_set]<rank[v_set]){
+    parent[u_set]=v_set;
+  }
+  else if(rank[v_set]<rank[u_set]){
+    parent[v_set]=u_set;
+  }else{
+    // can be anything
     parent[v_set]=u_set;
   }
 }
@@ -36,12 +46,13 @@ int unionSet(int u, int v, int parent[]){
 
 int main(){ 
     int parent[]={0, 1, 2, 3, 4, 5};
-  	unionSet(1, 2, parent);
-    unionSet(3, 4, parent);
-    unionSet(0, 5, parent);
-    unionSet(3, 5, parent);
-    unionSet(1, 5, parent);
-    cout<<find_set(3, parent); 
+    int rank[]={0, 0, 0 , 0, 0 , 0};
+  	unionSet(1, 2, parent, rank);
+    unionSet(3, 4, parent, rank);
+    unionSet(0, 5, parent, rank);
+    unionSet(3, 5, parent, rank);
+    unionSet(1, 5, parent, rank);
+    cout<<find_set(4, parent); 
     return 0; 
     
 }
