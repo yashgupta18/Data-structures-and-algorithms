@@ -98,9 +98,10 @@ int chris(int arr[], int n){
 }
 
 int main() {
-   int arr[]={3,4,8,9};
-   int n=sizeof(arr)/sizeof(arr[0]);
-   cout<<chris(arr, n);
+   // int arr[]={3,4,8,9};
+   // int n=sizeof(arr)/sizeof(arr[0]);
+   // cout<<chris(arr, n);
+  cout<<100?011;
     return 0;
 }
 
