@@ -1,79 +1,95 @@
-#include <bits/stdc++.h> 
+#include <iostream>
+#include<vector>
+#include<unordered_map>
+#include<queue>
+#include<algorithm>
+#include<cmath>
+#include<utility>
+
+#include<map>
 using namespace std; 
-  
-int max(int x, int y) 
+
+
+struct Node{
+  int data;
+  Node *left, *right;
+};
+struct Node *newNode(int item) 
 { 
-    return (x > y) ? x : y; 
-} 
-  
-// Returns minimum number of jumps 
-// to reach arr[n-1] from arr[0] 
-int minJumps(int arr[], int n) 
-{ 
-  
-    // The number of jumps needed to 
-    // reach the starting index is 0 
-    if (n <= 1) 
-        return 0; 
-  
-    // Return -1 if not possible to jump 
-    if (arr[0] == 0) 
-        return -1; 
-  
-    // initialization 
-    // stores all time the maximal 
-    // reachable index in the array. 
-    int maxReach = arr[0]; 
-  
-    // stores the number of steps 
-    // we can still take 
-    int step = arr[0]; 
-  
-    // stores the number of jumps 
-    // necessary to reach that maximal 
-    // reachable position. 
-    int jump = 1; 
-  
-    // Start traversing array 
-    int i = 1; 
-    for (i = 1; i < n; i++) { 
-        // Check if we have reached the end of the array 
-        if (i == n - 1) 
-            return jump; 
-  
-        // updating maxReach 
-        maxReach = max(maxReach, i + arr[i]); 
-  
-        // we use a step to get to the current index 
-        step--; 
-  
-        // If no further steps left 
-        if (step == 0) { 
-            // we must have used a jump 
-            jump++; 
-  
-            // Check if the current index/position or lesser index 
-            // is the maximum reach point from the previous indexes 
-            if (i >= maxReach) 
-                return -1; 
-  
-            // re-initialize the steps to the amount 
-            // of steps to reach maxReach from position i. 
-            step = maxReach - i; 
-        } 
-    } 
-  
-    return -1; 
-} 
-  
-// Driver program to test above function 
+    struct Node *temp =  (struct Node *)malloc(sizeof(struct Node)); 
+    temp->data = item; 
+    temp->left = temp->right = NULL; 
+    return temp; 
+}
+
+vector<int> find(int inorder[], int n1, int n2){
+    vector<int> v;
+    // cout<<"n1="<<n1<<endl;
+    // cout<<"n2="<<n2<<endl;
+    for (int i = n1; i < n2; ++i)
+    {
+        // cout<<i<<" ";
+        v.push_back(inorder[i]);
+    }
+
+    return v;
+}
+
+Node* constructTree(int levelorder[], int inorder[], unordered_map<int,int> mp, int n){
+    if(n==0) return NULL;
+
+    Node* root = newNode(levelorder[0]);
+
+    int mid = mp[levelorder[0]];
+
+    vector<int> left=find(inorder, 0, mid);
+    vector<int> right=find(inorder, mid+1, n);
+
+    vector<int> vectorLeft; 
+    for (int i = 0; i <left.size(); ++i)
+    {
+        vectorLeft.push_back(left[i]);
+    }
+
+    vector<int> vectorRight;
+    for (int i = 0; i < right.size(); ++i)
+    {
+        vectorRight.push_back(right[i]);
+    }
+
+    for (int i = 0; i < vectorLeft.size(); ++i)
+    {
+        cout<<vectorLeft[i]<<" ";
+    }
+    cout<<endl;
+
+
+    // root->left=constructTree(left,vectorLeft,mp);
+    // root->right=constructTree(right, vectorRight, mp);
+    return root;
+}
+
+
+int treeHeight(Node* root){
+    if(root==NULL) return 0;
+    return 1+min(treeHeight(root->left)+1, treeHeight(root->right)+1);
+}
+
+
 int main() 
 { 
-    int arr[] = { 1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9 }; 
-    int size = sizeof(arr) / sizeof(int); 
-  
-    // Calling the minJumps function 
-    cout << ("Minimum number of jumps to reach end is %d ", 
-             minJumps(arr, size)); 
+    int inorder[] = { 4,2,5,1,6,3,7 }; 
+    int levelorder[] = { 1,2,3,4,5,6,7 }; 
+    int n = sizeof(inorder) / sizeof(inorder[0]); 
+
+    unordered_map<int,int> mp;
+    for (int i = 0; i < 6; ++i)
+    {
+        mp[inorder[i]]=i;
+    }
+    int start=0;
+    Node* root=constructTree(levelorder, inorder, mp, n);
+    // cout<<treeHeight(root);  
+    cout<<abs(log2(n)+1);
     return 0; 
 } 

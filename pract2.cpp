@@ -1,109 +1,105 @@
-#include<iostream>
-#include<stack>
-#include <string.h>
-#include<vector>
-#include <cmath>
-
-using namespace std;
-
-bool checkIsAP(int arr[], int n) 
+// C++ program to caulate height of Binary Tree 
+// from InOrder and LevelOrder Traversals 
+#include <iostream> 
+using namespace std; 
+  
+/* Function to find index of value  
+   in the InOrder Traversal array */
+int search(int arr[], int strt, int end, int value) 
 { 
-    if (n == 1) 
-        return true; 
-  
-    // Sort array 
-    sort(arr, arr + n); 
-  
-    // After sorting, difference between 
-    // consecutive elements must be same. 
-    int d = arr[1] - arr[0]; 
-    for (int i = 2; i < n; i++) 
-        if (arr[i] - arr[i - 1] != d) 
-            return false; 
-  
-    return true; 
+    for (int i = strt; i <= end; i++) 
+        if (arr[i] == value) 
+            return i; 
+    return -1; 
 } 
-int Nth_of_AP(int a, int d, int N) 
-{  
-    // using formula to find the  
-    // Nth term t(n) = a(1) + (n-1)*d 
-    return (a + (N - 1) * d); 
-      
-} 
-
-
-bool checkIsFibonacci(int arr[], int n) 
+  
+// Function to calculate the height 
+// of the Binary Tree 
+int getHeight(int in[], int level[], int start, 
+              int end, int& height, int n) 
 { 
-    if (n == 1 || n == 2) 
-        return true; 
   
-    // Sort array 
-    sort(arr, arr + n); 
+    // Base Case 
+    if (start > end) 
+        return 0; 
   
-    // After sorting, check if every 
-    // element is equal to the 
-    // sum of previous 2 elements 
+    // Get index of current root in InOrder Traversal 
+    int getIndex = search(in, start, end, level[0]); 
   
-    for (int i = 2; i < n; i++){
-        if ((arr[i - 1] + arr[i - 2])!= arr[i]){ 
-            return 0;
-          } 
-    }
-    return 1; 
-} 
-int nextFibonacci(int n, int m) 
-{ 
-    return n+m;
-}
-
-bool is_geometric(int arr[], int n) 
-{ 
-    if (n == 1) 
-        return true; 
+    if (getIndex == -1) 
+        return 0; 
   
-    // Calculate ratio 
-    int ratio = arr[1] / (arr[0]); 
+    // Count elements in Left Subtree 
+    int leftCount = getIndex - start; 
   
-    // Check the ratio of the remaining 
-    for (int i = 1; i < n; i++) { 
-        if ((arr[i] / (arr[i - 1])) != ratio) { 
-            return false; 
+    // Count elements in right Subtree 
+    int rightCount = end - getIndex; 
+  
+    // Declare two arrays for left and 
+    // right subtrees 
+    int* newLeftLevel = new int[leftCount]; 
+    int* newRightLevel = new int[rightCount]; 
+  
+    int lheight = 0, rheight = 0; 
+    int k = 0; 
+  
+    // Extract values from level order traversal array 
+    // for current left subtree 
+    for (int i = 0; i < n; i++) { 
+        for (int j = start; j < getIndex; j++) { 
+            if (level[i] == in[j]) { 
+                newLeftLevel[k] = level[i]; 
+                k++; 
+                break; 
+            } 
         } 
     } 
-    return true; 
+  
+    k = 0; 
+  
+    // Extract values from level order traversal array 
+    // for current right subtree 
+    for (int i = 0; i < n; i++) { 
+        for (int j = getIndex + 1; j <= end; j++) { 
+            if (level[i] == in[j]) { 
+                newRightLevel[k] = level[i]; 
+                k++; 
+                break; 
+            } 
+        } 
+    } 
+  
+    // Recursively call to calculate height of left Subtree 
+    if (leftCount > 0) 
+        lheight = getHeight(in, newLeftLevel, start, 
+                            getIndex - 1, height, leftCount); 
+  
+    // Recursively call to calculate height of right Subtree 
+    if (rightCount > 0) 
+        rheight = getHeight(in, newRightLevel, 
+                            getIndex + 1, end, height, rightCount); 
+  
+    // Current height 
+    height = max(lheight + 1, rheight + 1); 
+  
+    // Delete Auxiliary arrays 
+    delete[] newRightLevel; 
+    delete[] newLeftLevel; 
+  
+    // return height 
+    return height; 
 } 
-int Nth_of_GP(int a, int r, int n) {
-   // the Nth term will be
-   return( a * (int)(pow(r, n - 1)) );
-}
-int chris(int arr[], int n){
-  if(n==0) return 1;
-
-   
-   if(checkIsFibonacci(arr, n)==1){
-    cout<<"fb";
-    return nextFibonacci(arr[n-1], arr[n-2]);
-   }
-   else if(checkIsAP(arr, n)==1){
-    cout<<"Ap";
-    return Nth_of_AP(arr[0], arr[1]-arr[0], n+1);
-   }
-   else if(is_geometric(arr, n)==1){
-    cout<<"gp";
-    return Nth_of_GP(arr[0], round(arr[1]/arr[0]), n+1);
-   }
-   else{
-    return -999;
-   }
-}
-
-int main() {
-   // int arr[]={3,4,8,9};
-   // int n=sizeof(arr)/sizeof(arr[0]);
-   // cout<<chris(arr, n);
-  cout<<100?011;
-    return 0;
-}
-
-
-
+  
+// Driver program to test above functions 
+int main() 
+{ 
+    int in[] = { 4, 2,5,1,6,3,7 }; 
+    int level[] = { 1,2,3,4,5,6,7 }; 
+    int n = sizeof(in) / sizeof(in[0]); 
+  
+    int h = 0; 
+  
+    cout << getHeight(in, level, 0, n - 1, h, n); 
+  
+    return 0; 
+} 
