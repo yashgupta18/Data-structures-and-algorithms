@@ -18,16 +18,16 @@ class LoveLetter
            }
        }
        //splitting the copy of string
-       String actualWrod[]=cpy.split("\\s");
+       String actualWord[]=cpy.split("\\s");
        
        //using this loop for rotating word
         for (int i = 0; i < rotateWord.length; i++) 
         {
             //using this loop for actual word
-            for (int j = 0; j < actualWrod.length; j++) 
+            for (int j = 0; j < actualWord.length; j++) 
             {
                //comparing rotated words with actual words
-               if(rotateWord[i].equals(actualWrod[j]))
+               if(rotateWord[i].equals(actualWord[j]))
                 //increment the counter if found same word after rotation
                    count++;
             }
