@@ -1,7 +1,8 @@
 // C++ program to caulate height of Binary Tree from InOrder and LevelOrder Traversals 
 #include <iostream> 
 using namespace std; 
-  
+int getHeight(int in[], int level[], int start, int end, int& height, int n);
+
 /* Function to find index of value in the InOrder Traversal array */
 int search(int arr[], int strt, int end, int value) 
 { 
@@ -72,7 +73,7 @@ int main()
     int level[] = {1,2,3,4,5,6,7}; //input2
     int n = sizeof(in) / sizeof(in[0]); 
     int h = 0; 
-    getHeight(in, level, 0, n - 1, h, n); 
+    cout<<getHeight(in, level, 0, n - 1, h, n); 
     cout<<h;
     return 0; 
 }
