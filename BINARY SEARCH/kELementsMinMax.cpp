@@ -1,5 +1,7 @@
 #include<iostream>
 #include<vector>
+#include<queue>
+
 using namespace std;
 
 
@@ -13,11 +15,47 @@ using namespace std;
 
 
 
-int main()
-{
-    int arr[] = {1, 2, 4,8, 9};
-    int n = sizeof(arr)/sizeof(arr[0]);
-    int k = 3;
-    cout << largestMinDist(arr, n, k);
-    return 0;
+int main()  {
+    // YOUR CODE GOES HERE
+    // Please take input and print output to standard input/output (stdin/stdout)
+    // E.g. 'cin' for input & 'cout' for output
+    int t;
+    cout<<"Enter test case"<<endl;
+    cin>>t;
+    while(t>0){
+        // solve();
+        int N, X;
+        cout<<"Enter N & X"<<endl;
+        cin>>N>>X;
+        int arr[N];
+        for(int i=0; i<N; i++){
+        	cout<<"Enter"<<i<<endl;
+            cin>>arr[i];
+        }
+        cout<<"Arr";
+        int res, i=0;
+        vector<int> ans;
+        priority_queue<int> pq;
+        while(X<N){
+            while(i<N && X-i>0){
+                pq.push(arr[i]);
+                i++;
+            }
+            
+            if(pq.empty()) return -1;
+            X+=pq.top();
+            ans.push_back(pq.top());
+            pq.pop();
+            res++;
+        }
+        
+        cout<<res<<endl;
+        for(int i=0; i<ans.size(); i++){
+            cout<<ans[i]<<" ";
+        }
+
+        cout<<endl;
+        t--;
+    }
+        return 0;
 }

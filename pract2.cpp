@@ -1,105 +1,52 @@
 // C++ program to caulate height of Binary Tree 
 // from InOrder and LevelOrder Traversals 
 #include <iostream> 
-using namespace std; 
-  
-/* Function to find index of value  
-   in the InOrder Traversal array */
-int search(int arr[], int strt, int end, int value) 
+#include <cmath> 
+
+using namespace std;
+ 
+// Utility function to find minimum of two integers 
+int min(int x, int y) 
 { 
-    for (int i = strt; i <= end; i++) 
-        if (arr[i] == value) 
-            return i; 
-    return -1; 
+    return (x < y)? x: y; 
+     
 } 
-  
-// Function to calculate the height 
-// of the Binary Tree 
-int getHeight(int in[], int level[], int start, 
-              int end, int& height, int n) 
+ 
+int calcAngle(double h, double m) 
 { 
-  
-    // Base Case 
-    if (start > end) 
-        return 0; 
-  
-    // Get index of current root in InOrder Traversal 
-    int getIndex = search(in, start, end, level[0]); 
-  
-    if (getIndex == -1) 
-        return 0; 
-  
-    // Count elements in Left Subtree 
-    int leftCount = getIndex - start; 
-  
-    // Count elements in right Subtree 
-    int rightCount = end - getIndex; 
-  
-    // Declare two arrays for left and 
-    // right subtrees 
-    int* newLeftLevel = new int[leftCount]; 
-    int* newRightLevel = new int[rightCount]; 
-  
-    int lheight = 0, rheight = 0; 
-    int k = 0; 
-  
-    // Extract values from level order traversal array 
-    // for current left subtree 
-    for (int i = 0; i < n; i++) { 
-        for (int j = start; j < getIndex; j++) { 
-            if (level[i] == in[j]) { 
-                newLeftLevel[k] = level[i]; 
-                k++; 
-                break; 
-            } 
-        } 
-    } 
-  
-    k = 0; 
-  
-    // Extract values from level order traversal array 
-    // for current right subtree 
-    for (int i = 0; i < n; i++) { 
-        for (int j = getIndex + 1; j <= end; j++) { 
-            if (level[i] == in[j]) { 
-                newRightLevel[k] = level[i]; 
-                k++; 
-                break; 
-            } 
-        } 
-    } 
-  
-    // Recursively call to calculate height of left Subtree 
-    if (leftCount > 0) 
-        lheight = getHeight(in, newLeftLevel, start, 
-                            getIndex - 1, height, leftCount); 
-  
-    // Recursively call to calculate height of right Subtree 
-    if (rightCount > 0) 
-        rheight = getHeight(in, newRightLevel, 
-                            getIndex + 1, end, height, rightCount); 
-  
-    // Current height 
-    height = max(lheight + 1, rheight + 1); 
-  
-    // Delete Auxiliary arrays 
-    delete[] newRightLevel; 
-    delete[] newLeftLevel; 
-  
-    // return height 
-    return height; 
+    // validate the input 
+    if (h <0 || m < 0 || h >12 || m > 60) 
+        printf("Wrong input"); 
+ 
+    if (h == 12) h = 0; 
+    if (m == 60)
+     {
+      m = 0;
+      h += 1;
+       if(h>12)
+        h = h-12;
+     } 
+ 
+    // Calculate the angles moved 
+    // by hour and minute hands 
+    // with reference to 12:00 
+    float hour_angle = 0.5 * (h * 60 + m); 
+    float minute_angle = 6 * m; 
+ 
+    // Find the difference between two angles 
+    float angle = abs(hour_angle - minute_angle); 
+ 
+    // Return the smaller angle of two possible angles 
+    angle = min(360 - angle, angle); 
+ 
+    return angle; 
 } 
-  
-// Driver program to test above functions 
+ 
+// Driver Code 
 int main() 
 { 
-    int in[] = { 4, 2,5,1,6,3,7 }; 
-    int level[] = { 1,2,3,4,5,6,7 }; 
-    int n = sizeof(in) / sizeof(in[0]); 
-  
-    int h = 0; 
-  
-    cout << getHeight(in, level, 0, n - 1, h, n); 
-  
+    cout << calcAngle(4, 10) << endl; 
+    cout << calcAngle(3, 30) << endl; 
     return 0; 
 } 
+ 
