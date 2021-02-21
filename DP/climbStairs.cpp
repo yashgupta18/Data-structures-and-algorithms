@@ -23,7 +23,7 @@ int countWays(int s, int m){
 
 
 int main(){
-	int s=5, m=3;
+	int s=4, m=4;
 	s=s+1;
 	cout<<countWays(s,m);
 	return 0;
