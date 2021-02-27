@@ -2,31 +2,10 @@
 #include <iostream>
 using namespace std;  
 
-
-int solve(){
-    int N, K;
-    cin>>N>>K;
-    cout<<N<<K;
-    while(N>=0){
-        if(N-K>=0){
-            N=N-K;
-        }
-        
-    }
-    return N;
-}      
 int main()
 {
-    int N, K;
-    cin>>N>>K;
-    cout<<N<<K;
-    while(N>=0){
-        if(N-K>=0){
-            N=N-K;
-        }
-        
-    }
-    cout<<N;
-    return 0;
+    int arr[2][2][2] = {10, 2, 3, 4, 5, 6, 7, 8};
+    cout<<arr[0][1][0]<<endl;
     
+    return 0;
 }
