@@ -52,7 +52,6 @@ void sieveOferas(){
 
 
 int main(){
-	int n=120;
 
 	sieveOferas();
 

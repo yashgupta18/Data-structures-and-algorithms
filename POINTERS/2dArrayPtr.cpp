@@ -5,16 +5,15 @@
 #include<algorithm>
 #include<cmath>
 #include<utility>
-
 #include<map>
-#define MUL(a,b) a*b
 using namespace std; 
-
 
 int main() 
 { 
-    int a=2, b=5;
-    cout<<MUL(a+5, b+3);
+
+    int a[2][3]={1,2,3,4,5,6};
+    cout<<a<<" "<<*a<<endl;
+    cout<<*(*(a))<<" "<<*(*(a)+1)<<" "<<*(*(a)+2);
     return 0; 
 } 
 
