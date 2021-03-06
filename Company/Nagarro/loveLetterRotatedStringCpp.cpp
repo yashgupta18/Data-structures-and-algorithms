@@ -49,11 +49,33 @@ int rotateWords(string words,int k)
 
 }
 
-int main() 
-{
-        cout<<rotateWords("adaada",3)<<endl;//1
-        cout<<rotateWords("loHel endFri", 3)<<endl;//0
-        cout<<rotateWords("Hello dFrien", 5)<<endl;//1
+// int main() 
+// {
+//         cout<<rotateWords("adaada",3)<<endl;//1
+//         cout<<rotateWords("loHel endFri", 3)<<endl;//0
+//         cout<<rotateWords("Hello dFrien", 5)<<endl;//1
 
+//         return 0;
+        int main() {
+        string line;
+        cin>>line;
+        vector<string> v;
+        stringstream ss(line);
+
+        while(ss.good()){
+          string substr;
+          getline(ss, substr, ';');
+          v.push_back(substr);
+        }
+        vector<int> v1;
+        for(int i=0; i<2; i++){
+          cout<<v[i]<<"";
+          
+        }
+        //solve(v1);
+        
+        
         return 0;
-    }
+        
+      }
+    // }

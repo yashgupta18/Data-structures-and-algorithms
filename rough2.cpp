@@ -1,46 +1,64 @@
+
+
 #include <iostream>
-#include<vector>
-#include<unordered_map>
-#include<queue>
-#include<algorithm>
-#include<cmath>
-#include<utility>
+#include <string>
+#include <vector>
+#include <sstream>
 
-#include<map>
-#define MUL(a,b) a*b
-using namespace std; 
+using namespace std;
 
-int main() 
-{ 
+void solve(vector<int> v){
+  if(v[1]<v[0]){
+    cout<<"ERROR\n";
+    return;
+  }
+  
+  string nameChange[]={"PENNY", "NICKEL","DIME","QUARTER","HALF DOLLAR", "ONE","TWO","FIVE","TEN","TWENTY","FIFTY","ONE HUNDRED"};
+  double coinChange[]={.01,.05,.10,.25,.50,1.00,2.00,5.00,10.00,20.00,50.00,100.00};
+  double change=v[1]-v[0];
+  cout<<"Change="<<change<<endl;
+  if(v[1]==v[0]){
+    cout<<"ZERO\n";
+    return;
+  }
+  else{
 
-    static int a[]={0,1,2,3,4};
-    static int *p[]={a, a+1, a+2, a+3, a+4};
-
-    // for (int i = 0; i < 5; ++i)
-    // {
-    //      code 
-    //     cout<<*p[i]<<" ";
-    // }
-    // cout<<endl;
-
-    int **ptr=p;
-    **ptr++;
-
-    cout<<**ptr<<" ";
-    cout<<endl;
-    cout<<ptr-p<<" "<<*ptr-a<<" "<<**ptr;
-    **(++ptr);
-    cout<<endl;
-    cout<<ptr-p<<" "<<*ptr-a<<" "<<**ptr;
-    ++(**ptr);
-    cout<<endl;
-    cout<<ptr-p<<" "<<*ptr-a<<" "<<**ptr;
-    return 0; 
-} 
-
-
-
-
-
-
-
+    int i=11;
+    while(change>0){
+      if(coinChange[i]<=change){
+        change=change-coinChange[i];
+        cout<<nameChange[i]<<",";
+        cout<<"Change="<<change<<endl;
+      }
+      else{
+        i--;
+      }
+    }
+  }
+  return;
+}
+int main() {
+  string line;
+  cin>>line;
+  vector<string> v;
+  stringstream ss(line);
+  while(ss.good()){
+    string substr;
+    getline(ss, substr, ';');
+    v.push_back(substr);
+  }
+  vector<int> v1;
+  for(int i=0; i<2; i++){
+    cout<<v[i]<<"";
+    string val=v[i];
+    stringstream degree(val);
+    int x=0;
+    degree>>x;
+    v1.push_back(x);
+  }
+  solve(v1);
+  
+  
+  return 0;
+  
+}

@@ -4,24 +4,31 @@
 using namespace std;
 
 string solve(ll n, ll arr[]){
-	unordered_map<int, int> count; 
-    for (int i = 0; i < n; i++) 
-        count[arr[i]]++; 
-    string ans="First";
-    for (int i = 0; i < n; ++i)
-    {
-        /* code */
-        if(arr[i]!=i){
-            for(auto x: count){
-                if(x.second>1){
-                    count[x]--;
+    if(n==1 && arr[0]>1) return "Second";
+    if(n==1 && arr[0]==1) return "First";
+    
+    sort(arr, arr+n);
+    string ans="Second";
+    int i=0;
+    while(i<n){
+        if(arr[i]==i+1){
+            i++;
+        }
+        else{
+            if(arr[i]<i+1){
+                arr[i]=arr[i]+1;
+                if(ans=="First"){
+                    ans="Second";
+                }else{
+                    ans="First";
                 }
             }
-            arr[i]=i;
-            count[i]++;
-            ans="Second";
+            else{
+                return ans;
+            }
         }
     }
+    
     return ans;
 
 }
