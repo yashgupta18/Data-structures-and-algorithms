@@ -38,6 +38,8 @@ void solve(vector<double> v){
   return;
 }
 int main() {
+  // input costprice, moneybycustomer separated by ';'
+  // ex input>> 15.23;17.20
   string line;
   cin>>line;
   vector<string> v;

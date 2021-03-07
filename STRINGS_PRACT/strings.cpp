@@ -113,28 +113,6 @@ int main(){
 	// string b="DEF";
 	// merge(a,b);
 
-	string arr[]={"time", "me", "line"};
-	// cout<<arr[1];
-	string newString1=arr[0];
-	int n1=newString1.length();
-	string newString2=arr[1];
-	int n2=newString2.length();
-	int count=0;
-	for (int i = n1-1, j=n2-1; i>=0 , j>=0; --i,--j)
-	{
-		/* code */
-		if(newString1[i]==newString2[j]){
-			count++;
-		}
-		else{
-			count=0;
-			break;
-		}
-	}
-
-	cout<<count;
-
-
 
 
 	return 0;
