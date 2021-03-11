@@ -1,11 +1,19 @@
 // APPLES
 #include <iostream>
+#include <vector>
+
 using namespace std;  
 
+
+// Driver program to test above function
 int main()
 {
-    int arr[2][2][2] = {10, 2, 3, 4, 5, 6, 7, 8};
-    cout<<arr[0][1][0]<<endl;
-    
-    return 0;
+	vector<int> coins;
+	coins.push_back(1);
+	coins.push_back(2);
+	coins.push_back(3);
+	for(int i:coins){
+		cout<<i<<" ";
+	}
+	return 0;
 }

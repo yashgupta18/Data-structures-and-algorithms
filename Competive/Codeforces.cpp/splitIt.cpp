@@ -9,7 +9,7 @@ string solve(ll n, string s, ll k){
 
 	ll l = 0; 
     ll h = n-1;
-    while (k>=0) 
+    while (k>0) 
     { 
         if (s[l] != s[h]) 
         { 
