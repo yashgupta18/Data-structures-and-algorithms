@@ -18,7 +18,7 @@ int main() {
 	    	if(s[i]=='1'){
 	    		while(i<s.length()){
 	    			if(s[i]=='1'){
-	    				i++;
+	    		a		i++;
 	    			}
 	    			else{
 	    				break;

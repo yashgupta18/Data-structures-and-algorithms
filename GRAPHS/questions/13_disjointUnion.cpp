@@ -48,10 +48,12 @@ int main(){
     int parent[]={0, 1, 2, 3, 4, 5};
     int rank[]={0, 0, 0 , 0, 0 , 0};
   	unionSet(1, 2, parent, rank);
+    unionSet(1, 3, parent, rank);
     unionSet(3, 4, parent, rank);
-    unionSet(0, 5, parent, rank);
-    unionSet(3, 5, parent, rank);
-    unionSet(1, 5, parent, rank);
+    // unionSet(3, 5, parent, rank);
+    // unionSet(1, 5, parent, rank);
+    cout<<find_set(4, parent); 
+    cout<<find_set(4, parent); 
     cout<<find_set(4, parent); 
     return 0; 
     
