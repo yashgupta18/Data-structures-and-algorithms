@@ -1,35 +1,42 @@
 #include <cmath> 
 #include <iostream> 
 #include <vector> 
-#include <iomanip>      // std::setprecision
+#include<sstream>
 
 using namespace std; 
   
-double power(double x, int n){
-    if(n == 0)
-        return 1;
-    double res = power(x, n / 2);
+int secondHighest(string s) {
+        stringstream ss;    
+        ss << s; 
+        string temp; 
+        int found; 
+        int max1,max2;
+        while (!ss.eof()) { 
 
-    if(n % 2 != 0)
-        return x * res * res;
-    else
-        return res * res;
-}
+            /* extracting word by word from stream */
+            ss >> temp; 
 
-double gp(double s, double t, int n){
-    double r = t / s;
-    double a = s / r;
-
-    return a * power(r, n - 1);
-}
+            /* Checking the given word is integer or not */
+            if (stringstream(temp) >> found){
+                cout<<found<<endl;
+                if(found>max1){
+                    max2=max1;
+                    max1=found;
+                }
+            } 
+                
+            /* To save from space at the end of string */
+            temp = ""; 
+        }
+        // if()
+        return max2;
+    }
   
 // Driven program to test 
 int main() 
 { 
-    
-    double a2=3, a3=9;
-    int n=5;
-    cout << fixed << setprecision(3) <<gp(a2,a3,n);
+    cout<<secondHighest("hell 12dsj34");
+  
     // cout<<ans;
     return 0; 
 } 

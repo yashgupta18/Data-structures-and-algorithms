@@ -59,8 +59,8 @@ int subset_sum(int arr[], int sum, int n)
 }
 
 int main(){
-	int arr[] ={ 2,3,5,6,8,10 };
-    int sum = 10; 
+	int arr[] ={ 1,4,10,3,1 };
+    int sum = 4; 
     int n = sizeof(arr) / sizeof(arr[0]); 
 	cout<<subset_sum(arr,sum,n);
 }
