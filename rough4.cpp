@@ -10,46 +10,45 @@
 #define MUL(a,b) a*b
 using namespace std; 
 
-bool solve(vector<vector<int>>& producers, vector<vector<int>>& consumers) {
-    map<int, int> j;
-
-    for (auto& p : producers) {
-        j[p[0]] += p[2];
-        j[p[1] + 1] -= p[2];
+int solve(string s, string t) {
+    map<char, int> mp;
+    for(int i=0;i<s.length(); i++){
+        mp[s[i]]++;
     }
 
-    for (auto& p : consumers) {
-        j[p[1] + 1] += p[2];
-        j[p[0]] -= p[2];
-    }
-
-    int start = 0;
-
-    for (auto& entry : j) {
-        start += entry.second;
-
-        if (start < 0) {
-            return false;
+    for(int i=0;i<t.length();i++){
+        if(mp.find(t[i])==mp.end()){
+            return -1;
         }
     }
 
-    return true;
+    int i=0,j=0;
+    while(s[i]!=t[j]){
+        i++;
+        cout<<i<<endl;
+    }
+    int count=1;
+    while(j<t.length()){
+        cout<<i<<" "<<j<<endl;
+        if(s[i]==t[j]){
+            i++;
+            j++;
+            if(i>=s.length()){
+                i=0;
+                count++;
+            }
+        }
+        else{
+            i++;
+        }
+    }
+    return count;
 }
 
 int main(){
-	vector<vector<int>>& producers;
-	vector<vector<int>>& consumers;
-
-// producers = [
-//     [0, 10, 5],
-//     [5, 15, 10]
-// ]
-// consumers = [
-//     [5, 10, 15],
-//     [11, 15, 8]
-// ]
-
-
+	
+    cout<<solve("dab", "abbd");
+    return 0;
 
 
 
