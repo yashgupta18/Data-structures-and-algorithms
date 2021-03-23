@@ -5,9 +5,14 @@
 #include<algorithm>
 #include<cmath>
 #include<utility>
-
 #include<map>
-using namespace std; 
+using namespace std;
+
+ 
+// Given an integer array arr, and an integer target, return the number of tuples i, j, k such that i < j < k and arr[i] + arr[j] + arr[k] == target.
+
+// As the answer can be very large, return it modulo 109 + 7.
+
 
 int threeSumMulti(vector<int>& arr, int target) {
         unordered_map<int, long> c;

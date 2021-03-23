@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 { 
-    string p="party";
+    string p="partyp";
     string q="pawri";
 	ll tc;
     cin>>tc;

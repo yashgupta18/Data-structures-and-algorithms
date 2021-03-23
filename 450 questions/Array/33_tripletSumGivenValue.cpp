@@ -78,7 +78,7 @@ bool tripletSumFind(int arr[], int n, int sum){
 		for (int j = i+1; j < n; ++j)
 		{
 			if(myset.find(currSum-arr[j])!=myset.end()){
-				cout<<"Nums are:"<<arr[j]<<" "<<arr[i]<<" "<<currSum;
+				cout<<"Nums are:"<<arr[j]<<" "<<arr[i]<<" "<<currSum-arr[j];
 				return true;
 			}
 			myset.insert(arr[j]);
