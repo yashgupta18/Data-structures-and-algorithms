@@ -1,5 +1,5 @@
 #include <iostream>
-#include<vector>
+#include<stdio.h>
 #include<unordered_map>
 #include<unordered_set>
 #include<algorithm>
@@ -9,25 +9,24 @@
 #include<map>
 using namespace std; 
 
-int threeSumMulti(vector<int>& arr, int target) {
-        if(n==1) return 1;
-        if(n==)
+class address{
+    int x,y;
+public:
+    void call(int &a, int &b){
+        x=a;
+        a=a+3*2;
+        y=b;
+        cout<<a<<" "<<b;
     }
+};
 
 int main(){
 	
-    vector<int> arr;
-    arr.push_back(1);
-    arr.push_back(1);
-    arr.push_back(2);
-    arr.push_back(2);
-    arr.push_back(3);
-    arr.push_back(3);
-    arr.push_back(4);
-    arr.push_back(4);
-    arr.push_back(5);
-    arr.push_back(5);
-    cout<<threeSumMulti(arr, 8);
+   int x=32;
+   int y=x;
+   address we;
+   we.call(x,y);
+   
     return 0;
 
 
