@@ -22,10 +22,7 @@ public:
 
 int main(){
 	
-   int x=32;
-   int y=x;
-   address we;
-   we.call(x,y);
+   cout<<sqrt(2);
    
     return 0;
 
