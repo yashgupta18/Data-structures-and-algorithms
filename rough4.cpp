@@ -22,7 +22,7 @@ public:
 
 int main(){
 	
-   cout<<sqrt(2);
+   cout<<'d'-'a';
    
     return 0;
 

@@ -15,9 +15,7 @@ int main() {
 	    	cout<<"YES"<<endl;
 	    }
 	    else{
-	    	int ans=pow(u,2)-(2*a*s);
-		    double final=sqrt(ans);
-		    if(ans<=v){
+		    if((u*u-v*v)<=2*a(s)){
 		    	cout<<"YES"<<endl;
 		    }
 		    else{
