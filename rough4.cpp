@@ -4,30 +4,34 @@
 #include<unordered_set>
 #include<algorithm>
 #include<cmath>
-#include<utility>
+#include<string>
 
 #include<map>
 using namespace std; 
 
-class address{
-    int x,y;
-public:
-    void call(int &a, int &b){
-        x=a;
-        a=a+3*2;
-        y=b;
-        cout<<a<<" "<<b;
+
+int reversell(&arr){
+    Node*temp=head;
+    Node* fastptr=head->next;
+    Node* curr=NULL;
+    while(temp!=NULL){
+        // Node* curr=temp;
+        temp->next=curr;
+        curr=temp;
+        temp=fastptr;
+        fastptr=fastptr->next;
+        temp->next=curr;
     }
-};
+
+    return temp;
+}
 
 int main(){
 	
-   cout<<'d'-'a';
-   
+   int arr[]={2,2,1};
+   int n=sizeof(arr)/sizeof(arr[0]);
+   cout<<findsingle(arr,n);
     return 0;
-
-
-
 }
 
 
