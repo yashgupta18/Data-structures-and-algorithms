@@ -40,9 +40,9 @@ void unionSet(int u, int v, int parent[], int rank[]){
   int u_set=find_set(u, parent);
   int v_set=find_set(v, parent);
 
-  if(u_set!=v_set){
-    parent[v_set]=u_set;
-  }
+  // if(u_set!=v_set){
+  //   parent[v_set]=u_set;
+  // }
 
   if(rank[u_set]<rank[v_set]){
     parent[u_set]=v_set;
@@ -51,7 +51,9 @@ void unionSet(int u, int v, int parent[], int rank[]){
     parent[v_set]=u_set;
   }else{
     // can be anything
-    parent[v_set]=u_set;
+    // parent[v_set]=u_set;
+    parent[u_set] = v_set;
+    rank[v_set]++;
   }
 }
 
