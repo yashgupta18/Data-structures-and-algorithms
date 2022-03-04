@@ -12,6 +12,7 @@ class Employee:AbstractEmployee {
     string Company; //data member(also instance variable)  
     int Age;  
 protected:
+  //accessible in derived class
     string Name; //data member (also instance variable)      
 
    public:  
@@ -62,9 +63,12 @@ protected:
       } 
 };  
 
+//Developer is inheriting Employee class
+//using publc before Employee allows us to access virtual fn in Developer class 
 class Developer:public Employee{
 public:
     string favProgLang;
+    //pass properties of Employee class to it's constructor
     Developer(string name, string company, int age, string favLang):Employee(name, company, age){
         favProgLang=favLang;
     }

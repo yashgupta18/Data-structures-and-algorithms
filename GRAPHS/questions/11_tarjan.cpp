@@ -41,7 +41,7 @@ void dfs(int u, int disc[], int inTime[], stack<int>&s, bool inStack[]){
         inTime[u]=min(inTime[v], inTime[u]);
       }
       //if already visited update current node inTime with discTime of visited
-      else if(inStack[v]){
+      else if(inStack[v]){ //back edge as it is vis and present in stack. 
         inTime[u]=min(inTime[u], disc[v]);
       }
     }
@@ -49,7 +49,7 @@ void dfs(int u, int disc[], int inTime[], stack<int>&s, bool inStack[]){
 
   int poppedItem=0;
   //if come back to initial node of SCC and inTime==discTime that's 1 SSC
-  if(inTime[u]==disc[u]){
+  if(inTime[u]==disc[u]){ // if curr node is head of SSC
     while(s.top()!=u){
       // 1 SSC Start 
       int poppedItem=s.top();

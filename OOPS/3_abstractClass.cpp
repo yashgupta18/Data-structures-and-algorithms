@@ -1,8 +1,10 @@
 #include <iostream>  
 using namespace std;  
 
+//Abstract class
+//Whichever class uses this class need to provide implemetation for virtual fn(askForPromotion )
 class AbstractEmployee{
-
+  //pure virtual function/ abstract fn 
   virtual void askForPromotion()=0;
 };
 

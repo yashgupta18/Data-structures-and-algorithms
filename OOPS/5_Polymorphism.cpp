@@ -63,7 +63,7 @@ protected:
 
       //check if Derived class has same method than execute those else this
       virtual void Work(){
-        cout<<Name <<" From Emploee Class" << endl;
+        cout<<Name <<"From Employee Class" << endl;
       }
 };  
 
@@ -101,6 +101,7 @@ public:
 
 
 int main(void) {  
+    // The most common use of polymorphism is when a parent class reference is used to refer a child class object
     Employee e1 =Employee("Yash", "Google", 22); //creating an object of Employee   
     Employee e2=Employee("Varad", "optifcal", 41); //creating an object of Employee  
     

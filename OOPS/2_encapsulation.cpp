@@ -2,10 +2,21 @@
 using namespace std;  
 class Employee {  
   private:
+    //Moving these variables to private is encapsulation(hidden). They cannot be accessed directly outside class.
+    //We need to create our own methods to access them ex getName, getAge etc.
     string Name; //data member (also instance variable)      
     string Company; //data member(also instance variable)  
     int Age;  
    public:  
+      //constructor
+      //should be public. Can be private in special cases.
+      //Name of constructor should be same is Class name.
+      Employee(string name, string company, int age)    
+      {    
+          Name=name;
+          Company=company;
+          Age=age;
+      }  
 
       void setName(string name){
         Name=name;
@@ -30,13 +41,6 @@ class Employee {
       int getAge(){
         return Age;
       }
-
-      Employee(string name, string company, int age)    
-      {    
-          Name=name;
-          Company=company;
-          Age=age;
-      }  
        
        void display()    
         {    
